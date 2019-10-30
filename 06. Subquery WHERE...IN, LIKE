@@ -1,0 +1,20 @@
+CREATE TABLE drs_favorites
+    (id INTEGER PRIMARY KEY,
+    type TEXT,
+    reason TEXT);
+
+INSERT INTO drs_favorites(type, reason) VALUES ("biking", "Improves endurance and flexibility.");
+INSERT INTO drs_favorites(type, reason) VALUES ("hiking", "Increases cardiovascular health.");
+
+SELECT type FROM drs_favorites;
+
+SELECT * FROM exercise_logs WHERE type IN (
+    SELECT type FROM drs_favorites);
+    
+SELECT * FROM exercise_logs WHERE type IN (
+    SELECT type FROM drs_favorites WHERE reason = "Increases cardiovascular health");
+    
+/* LIKE */
+
+SELECT * FROM exercise_logs WHERE type IN (
+    SELECT type FROM drs_favorites WHERE reason LIKE "%cardiovascular%");
