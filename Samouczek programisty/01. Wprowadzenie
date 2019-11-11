@@ -1,0 +1,51 @@
+Podział zapytań:
+
+DQL
+DQL składa się wyłącznie z zapytań typu SELECT. 
+
+DML
+Tworzenie, modyfikowanie i usuwanie danych. 
+
+INSERT – dodaje wiersze do tabeli,
+UPDATE – aktualizuje wiersze w tabeli,
+DELETE – usuwa wiersze z tabeli.
+
+DDL
+Zarządzanie obiekatmi.
+
+CREATE – tworzą obiekty bazy danych,
+ALTER – modyfikują tabele bazy danych,
+DROP – usuwają obiekty bazy danych,
+TRUNCATE – usuwa wszystkie dane z tabeli.
+
+DCL
+Manipulacja prawami dostępu.
+
+GRANT – nadaje uprawnienia,
+REVOKE – usuwa uprawnienia.
+
+TCL
+Transakcje.
+
+BEGIN – rozpoczyna transakcję,
+COMMIT – zatwierdza transakcję,
+ROLLBACK – wycofuje transakcję,
+SAVEPOINT – zapisuje punkt przywracania aktualnej transakcji.
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+Typy danych:
+
+INTEGER – służy on do przechowywania liczb całkowitych,
+NVARCHAR(x) – służy on do przechowywania łańcuchów znaków do długości x,
+NUMERIC(x, y) – służy do przechowywania liczb rzeczywistych, które mają do x cyfr z y po przecinku.
+BLOB – służy do przechowywania danych binarnych (ang. binary large object),
+DATETIME – służy do przechowywania daty i czasu,
+DATE – służy do przechowywania daty,
+BOOLEAN – służy do przechowywania wartości logicznych,
+TEXT – służy do przechowywania łańcuchów znaków gdzie ciężko jest oszacować maksymalną długość tekstu 
+       lub wahania długości tekstu są duże.
+       
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
