@@ -29,11 +29,34 @@ SELECT * FROM invoice WHERE billingcity = 'Dublin' AND total > 5 OR billingcity 
 to samo inaczej:
 SELECT * FROM invoice WHERE (billingcity = 'Dublin' AND total > 5) OR (billingcity = 'Boston' AND total < 3 AND total > 1);
 
+Nawiasy zmieniają zapytanie:
+x OR y AND z
+Bez zmian:
+x OR (y AND z)
+Zmiana kolejności wykonywania operacji:
+(x OR y) AND z
+
+(NOT x) OR y = NOT x OR y
+Zmiana warunku:
+NOT (x OR y)
+
 SELECT * FROM invoice WHERE billingstate IS NOT NULL AND billingcountry != 'USA';
 
 SELECT invoicedate,billingcity,total FROM invoice WHERE billingcountry = 'Poland';
 
+SELECT name FROM genre;
 
+SELECT billingstate FROM invoice WHERE billingcountry = 'USA' AND total > 15;
 
+SELECT billingcountry FROM invoice WHERE total < 10 AND invoicedate > '2013-12-05 00:00:00' AND invoicedate < '2013-12-09 00:00:00';
+
+SELECT billingcity, billingcountry FROM invoice WHERE (billingstate IS NULL AND total > 17) OR (total < 1 AND billingstate IS NOT NULL
+AND invoicedate > '2013-09-20 00:00:00');
+
+SELECT * FROM album WHERE title LIKE '%''%';
+
+SELECT * FROM invoice WHERE billingcountry > 'A' AND billingcountry < 'C';
+
+SELECT * FROM invoice WHERE billingcountry = 'Poland' AND invoicedate > '2012-05-26';
 
 
