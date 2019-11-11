@@ -4,6 +4,7 @@ SQL nie zwraca uwagi na wielkość liter:
 "SELECT * FROM genre WHERE genreid = 1;" 
 to samo inaczej: "SELECT * frOM geNRe wherE GenReID = 1;"
 
+
 sqlite> .schema Invoice
 CREATE TABLE [Invoice]
 (
@@ -24,11 +25,13 @@ CREATE UNIQUE INDEX [IPK_Invoice] ON [Invoice]([InvoiceId]);
 CREATE INDEX [IFK_InvoiceCustomerId] ON [Invoice] ([CustomerId]);
 
 
+AND/OR:
 Słowo kluczowe AND ma wyższy priorytet niż OR. Oznacza to, że warunki pomiędzy AND wykonywane są wcześniej niż OR.
 SELECT * FROM invoice WHERE billingcity = 'Dublin' AND total > 5 OR billingcity = 'Boston' AND total < 3 AND total > 1;
 to samo inaczej:
 SELECT * FROM invoice WHERE (billingcity = 'Dublin' AND total > 5) OR (billingcity = 'Boston' AND total < 3 AND total > 1);
 
+Łączenie warunków:
 Nawiasy zmieniają zapytanie:
 x OR y AND z
 Bez zmian:
@@ -36,27 +39,64 @@ x OR (y AND z)
 Zmiana kolejności wykonywania operacji:
 (x OR y) AND z
 
+Negacja warunków:
 (NOT x) OR y = NOT x OR y
 Zmiana warunku:
 NOT (x OR y)
 
+
+NULL:
 SELECT * FROM invoice WHERE billingstate IS NOT NULL AND billingcountry != 'USA';
 
+
+Wybór kolumn:
 SELECT invoicedate,billingcity,total FROM invoice WHERE billingcountry = 'Poland';
 
-SELECT name FROM genre;
 
-SELECT billingstate FROM invoice WHERE billingcountry = 'USA' AND total > 15;
-
+Daty:
 SELECT billingcountry FROM invoice WHERE total < 10 AND invoicedate > '2013-12-05 00:00:00' AND invoicedate < '2013-12-09 00:00:00';
 
 SELECT billingcity, billingcountry FROM invoice WHERE (billingstate IS NULL AND total > 17) OR (total < 1 AND billingstate IS NOT NULL
 AND invoicedate > '2013-09-20 00:00:00');
 
+SELECT * FROM invoice WHERE billingcountry = 'Poland' AND invoicedate > '2012-05-26';
+
+SELECT firstname FROM employee WHERE birthdate BETWEEN '1960-' AND '1970-';
+
+
+Znaki specjalne:
 SELECT * FROM album WHERE title LIKE '%''%';
 
+
+Porównywanie łańcuchów:
 SELECT * FROM invoice WHERE billingcountry > 'A' AND billingcountry < 'C';
 
-SELECT * FROM invoice WHERE billingcountry = 'Poland' AND invoicedate > '2012-05-26';
+
+BETWEEN:
+SELECT * FROM invoice WHERE total BETWEEN 10.91 AND 11.96;
+
+
+LIKE:
+% – oznacza dowolną liczbę znaków,
+_ – oznacza jeden znak.
+
+SELECT * FROM invoice WHERE billingcountry LIKE '%land'; - tylko te co kończą się na "land"
+SELECT * FROM invoice WHERE billingcountry LIKE '%land%'; - zawierają ciąg znaków "land"
+
+ESCAPE:
+żeby _  % były traktowane dosłownie 
+SELECT * FROM track WHERE name LIKE '%e%%' ESCAPE 'e';
+
+
+IS NULL:
+SELECT * FROM invoice WHERE billingstate IS NULL;
+
+
+IN:
+Użycie IN jest tożsame odpowiedniej liczbie warunków połączonych OR.
+SELECT * FROM invoice WHERE billingcountry = 'USA' AND billingstate IN ('CA', 'TX'); - znajdzie wszystkie USA w kolumnach CA i TX
+
+
+
 
 
