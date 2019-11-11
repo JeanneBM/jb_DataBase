@@ -1,1 +1,39 @@
+SELECT * FROM genre WHERE name = 'Rock' AND genreid < 20;
+
+SQL nie zwraca uwagi na wielkość liter:
+"SELECT * FROM genre WHERE genreid = 1;" 
+to samo inaczej: "SELECT * frOM geNRe wherE GenReID = 1;"
+
+sqlite> .schema Invoice
+CREATE TABLE [Invoice]
+(
+    [InvoiceId] INTEGER  NOT NULL,
+    [CustomerId] INTEGER  NOT NULL,
+    [InvoiceDate] DATETIME  NOT NULL,
+    [BillingAddress] NVARCHAR(70),
+    [BillingCity] NVARCHAR(40),
+    [BillingState] NVARCHAR(40),
+    [BillingCountry] NVARCHAR(40),
+    [BillingPostalCode] NVARCHAR(10),
+    [Total] NUMERIC(10,2)  NOT NULL,
+    CONSTRAINT [PK_Invoice] PRIMARY KEY  ([InvoiceId]),
+    FOREIGN KEY ([CustomerId]) REFERENCES [Customer] ([CustomerId])
+                ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+CREATE UNIQUE INDEX [IPK_Invoice] ON [Invoice]([InvoiceId]);
+CREATE INDEX [IFK_InvoiceCustomerId] ON [Invoice] ([CustomerId]);
+
+
+Słowo kluczowe AND ma wyższy priorytet niż OR. Oznacza to, że warunki pomiędzy AND wykonywane są wcześniej niż OR.
+SELECT * FROM invoice WHERE billingcity = 'Dublin' AND total > 5 OR billingcity = 'Boston' AND total < 3 AND total > 1;
+to samo inaczej:
+SELECT * FROM invoice WHERE (billingcity = 'Dublin' AND total > 5) OR (billingcity = 'Boston' AND total < 3 AND total > 1);
+
+SELECT * FROM invoice WHERE billingstate IS NOT NULL AND billingcountry != 'USA';
+
+SELECT invoicedate,billingcity,total FROM invoice WHERE billingcountry = 'Poland';
+
+
+
+
 
