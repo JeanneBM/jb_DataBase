@@ -41,3 +41,4 @@ SELECT a.title, b.title FROM project_pairs
     ON project_pairs.project1_id = a.id
     JOIN student_projects b
     ON project_pairs.project2_id = b.id;
+
