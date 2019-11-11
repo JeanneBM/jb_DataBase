@@ -97,6 +97,13 @@ Użycie IN jest tożsame odpowiedniej liczbie warunków połączonych OR.
 SELECT * FROM invoice WHERE billingcountry = 'USA' AND billingstate IN ('CA', 'TX'); - znajdzie wszystkie USA w kolumnach CA i TX
 
 
+LIMIT:
+SELECT * FROM genre LIMIT 5; - tylko 5 wierszy
+
+
+OFFSET:
+SELECT * FROM genre LIMIT 5 OFFSET 10; - pominie pierwsze 10 wierszy
+SELECT * FROM genre LIMIT 5 OFFSET 10;
 
 
 
