@@ -1,3 +1,5 @@
+Słowo kluczowe AND ma wyższy priorytet niż OR. Oznacza to, że warunki pomiędzy AND wykonywane są wcześniej niż OR. 
+
 CREATE TABLE exercise_logs
     (id INTEGER PRIMARY KEY AUTOINCREMENT,
     type TEXT,
