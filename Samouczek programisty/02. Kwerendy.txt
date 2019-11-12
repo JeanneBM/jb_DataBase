@@ -132,5 +132,11 @@ SELECT name AS xxx FROM genre UNION ALL SELECT DISTINCT billingcity FROM invoice
 - zwraca w jednej kolumnie o nazwie xxx wszystkie wartości kolumny name z tabeli genre połączone z unikalnymi wartościami kolumny 
  billingcity z tabeli invoice 
 
+Podzapytania, które są scalane przy użyciu wyrażeń UNION albo UNION ALL muszą zwracać tę samą liczbę kolumn o tym samym typie.
+Wyrażenia LIMIT i ORDER BY mogą być użyte tylko do scalonych zapytań. Nie możesz ich użyć wewnątrz zapytań, które są scalane.
+
+UNION a UNION ALL:
+Oba wyrażenia służą do scalenia wyników wielu zapytań. Jednak UNION zwróci unikalną listę wierszy, kiedy UNION ALL zwróci wszystkie 
+wiersze i w wyniku mogą być duplikaty.
 
 
