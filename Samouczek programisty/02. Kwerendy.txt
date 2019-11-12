@@ -106,4 +106,31 @@ SELECT * FROM genre LIMIT 5 OFFSET 10; - pominie pierwsze 10 wierszy
 SELECT * FROM genre LIMIT 5 OFFSET 10;
 
 
+DISTINCT:
+Odfiltrowanie powielonych wierszy.
+SELECT DISTINCT billingcountry FROM invoice;
+SELECT DISTINCT billingcountry,billingcity FROM invoice; - odfiltruje wyniki, gdzie w obu przypadkach jest powielone jednocześnie
+
+DISTINCT wartości NULL traktuje jako równe sobie.
+
+
+ORDER BY. Sortowanie:
+Rosnąco: SELECT name FROM genre ORDER BY name; lub  SELECT name FROM genre ORDER BY name ASC; 
+ASC można pominąć - z założenia jest rosnąco
+Malejąco:  SELECT name FROM genre ORDER BY name DESC;
+Po wielu kolumnach: SELECT DISTINCT billingcountry, billingstate FROM invoice ORDER BY billingcountry DESC, billingstate;
+
+
+AS. Aliasy dla kolumn:
+zmiana nazwy kolumn pokazywanych w wynku.
+SELECT genreid AS id, name AS 'genre name' FROM genre LIMIT 5;
+ 
+ 
+Scalanie wyników wielu zapytań:
+UNION ALL:
+SELECT name AS xxx FROM genre UNION ALL SELECT DISTINCT billingcity FROM invoice ORDER BY xxx LIMIT 10;
+- zwraca w jednej kolumnie o nazwie xxx wszystkie wartości kolumny name z tabeli genre połączone z unikalnymi wartościami kolumny 
+ billingcity z tabeli invoice 
+
+
 
