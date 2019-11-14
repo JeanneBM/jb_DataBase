@@ -143,3 +143,40 @@ UNION ALL do scalania dwóch zapytań:
 SELECT genreid, name AS xxx FROM genre UNION ALL SELECT invoiceid,billingcity FROM invoice UNION SELECT albumid, title FROM album
  ORDER BY xxx LIMIT 10;
 
+
+FUNKCJE:
+
+Funkcja operująca na tabeli:
+SELECT LENGTH(billingstate) FROM invoice LIMIT 5;
+
+SELECT DISTINCT LENGTH(billingstate) FROM invoice;
+wynik:
+[puste]
+2
+6
+3
+Wyniki tego zapytania można zrozumieć jako: w tabeli invoice istnieją wiersze, których wartość kolumny billingstate jest pusta, ma 
+długość 2, 6 albo 3.
+
+Wiele funkcji w wielu miejscach:
+SELECT DISTINCT LENGTH(billingstate) FROM invoice ORDER BY LENGTH(billingstate);
+z aliasem lepiej:
+SELECT DISTINCT LENGTH(billingstate) AS len FROM invoice ORDER BY len;
+
+Łączenie funkcji:
+SELECT MAX(LENGTH(billingstate)) FROM invoice;
+jeden wiersz, zawierający maksymalną wartość zwróconą przez funkcję LENGTH
+
+Inne przykładowe:
+ABS – zwraca wartość bezwzględną przyjmowanego argumentu,
+LENGTH – zwraca długość łańcucha znaków,
+LOWER – zwraca kopię łańcucha znaków przekazanego jako parametr, w którym wszystkie litery zamienione są na małe,
+RANDOM – zwraca losową liczbę całkowitą,
+SUBSTR3 – SUBSTR(x, y, z) pobiera podzbiór znaków parametru x od litery y o długości z. Parametr z może być pominięty, wtedy funkcja zwraca podzbiór znaków od znaku y do końca. Pierwsza litera ma indeks 1,
+TRIM – usuwa spacje z obu stron przekazanego parametru,
+UPPER – funkcja działa podobnie jak LOWER, tym razem zwracany łańcuch znaków składa się z wielkich liter.
+
+Grupowanie GROUP BY:
+SELECT billingcountry, MAX(total) FROM invoice GROUP BY billingcountry LIMIT 5;
+zwróci pięć wierszy. Każdy z nich zawierał będzie kraj i największą wartość faktury dla danego kraju
+
