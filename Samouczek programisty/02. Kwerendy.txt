@@ -57,7 +57,7 @@ Daty:
 SELECT billingcountry FROM invoice WHERE total < 10 AND invoicedate > '2013-12-05 00:00:00' AND invoicedate < '2013-12-09 00:00:00';
 
 SELECT billingcity, billingcountry FROM invoice WHERE (billingstate IS NULL AND total > 17) OR (total < 1 AND billingstate IS NOT NULL
-AND invoicedate > '2013-09-20 00:00:00');
+ AND invoicedate > '2013-09-20 00:00:00');
 
 SELECT * FROM invoice WHERE billingcountry = 'Poland' AND invoicedate > '2012-05-26';
 
@@ -139,4 +139,7 @@ UNION a UNION ALL:
 Oba wyrażenia służą do scalenia wyników wielu zapytań. Jednak UNION zwróci unikalną listę wierszy, kiedy UNION ALL zwróci wszystkie 
 wiersze i w wyniku mogą być duplikaty.
 
+UNION ALL do scalania dwóch zapytań:
+SELECT genreid, name AS xxx FROM genre UNION ALL SELECT invoiceid,billingcity FROM invoice UNION SELECT albumid, title FROM album
+ ORDER BY xxx LIMIT 10;
 
