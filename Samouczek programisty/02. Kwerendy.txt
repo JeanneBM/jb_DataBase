@@ -180,3 +180,13 @@ Grupowanie GROUP BY:
 SELECT billingcountry, MAX(total) FROM invoice GROUP BY billingcountry LIMIT 5;
 zwróci pięć wierszy. Każdy z nich zawierał będzie kraj i największą wartość faktury dla danego kraju
 
+Grupowanie na wiele kolumn:
+SELECT billingcountry, billingstate, MAX(total) FROM invoice GROUP BY billingcountry, billingstate LIMIT 5;
+
+Grupowanie w SQLite:
+jest dziwne. Oznacza, że poniższe zapytanie SQLite uzna za poprawne:
+SELECT billingcountry, MAX(total) FROM invoice;
+każda kolumna, która jest zwracana powinna być albo uwzględniona w wyrażeniu GROUP BY, albo użyta w funkcji grupującej
+
+
+
