@@ -275,6 +275,8 @@ FULL JOIN to samo co FULL OUTER JOIN,
 CROSS JOIN to samo co iloczyn kartezjański.
 
 
+Podzapytania:
+
 
 
 
