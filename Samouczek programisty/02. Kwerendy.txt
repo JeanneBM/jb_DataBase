@@ -176,6 +176,7 @@ SUBSTR3 – SUBSTR(x, y, z) pobiera podzbiór znaków parametru x od litery y o 
 TRIM – usuwa spacje z obu stron przekazanego parametru,
 UPPER – funkcja działa podobnie jak LOWER, tym razem zwracany łańcuch znaków składa się z wielkich liter.
 
+
 Grupowanie GROUP BY:
 SELECT billingcountry, MAX(total) FROM invoice GROUP BY billingcountry LIMIT 5;
 zwróci pięć wierszy. Każdy z nich zawierał będzie kraj i największą wartość faktury dla danego kraju
@@ -188,5 +189,48 @@ jest dziwne. Oznacza, że poniższe zapytanie SQLite uzna za poprawne:
 SELECT billingcountry, MAX(total) FROM invoice;
 każda kolumna, która jest zwracana powinna być albo uwzględniona w wyrażeniu GROUP BY, albo użyta w funkcji grupującej
 
+Inne funkcje grupujące:
+AVG – zwraca średnią wartość,
+MAX – zwraca maksymalną wartość,
+MIN – zwraca minimalną wartość,
+SUM – zwraca sumę wartości,
+TOTAL – działa podobnie jak SUM, jedyna różnica polega na tym, że jeśli wszystkie wartości to NULL, wówczas TOTAL zwróci 0, a SUM 
+zwróci NULL,
+COUNT - zliczanie wierszy, które mają wartość inną niż NULL.
 
+COUNT:
+SELECT COUNT(customerid) FROM invoice;
+SELECT COUNT(*) FROM invoice;
+SELECT COUNT(DISTINCT customerid) FROM invoice;
+
+
+HAVING:
+SELECT billingcountry, SUM(total) AS summed_total FROM invoice GROUP BY billingcountry HAVING summed_total > 100;
+
+WHERE a HAVING:
+WHERE służy do filtrowania wyników zapytania biorąc pod uwagę pojedynczy wiersz
+HAVING pozwala na filtrowanie wyników na podstawie zgrupowanych wartości
+
+Połączenie WHERE i HAVING w jednym zapytaniu często pozwala lepiej zrozumieć różnicę pomiędzy nimi:
+SELECT billingcountry, SUM(total) AS summed_total FROM invoice WHERE billingcity != 'Ottawa' GROUP BY billingcountry 
+ HAVING summed_total > 100;
+
+
+Iloczyn kartezjański:
+SELECT imiona_meskie.id AS id_m, imiona_zenskie.imie AS imie_z, imiona_zenskie.* FROM imiona_meskie, imiona_zenskie;
+
+INNER JOIN:
+SELECT * FROM bajka INNER JOIN postac ON bajka.id = postac.bajka_id;
+To zapytanie zwraca wszystkie kolumny z tabel bajka i postac. Zwrócone są tylko te wiersze, dla których wartość kolumn bajka.id i 
+postac.bajka_id jest równa.
+Z iloczynu kartezjańskiego wybiera te wiersze, dla których warunek złączenia jest spełniony. 
+W żadnej z łączonych tabel kolumna użyta do łączenia nie może mieć wartości NULL.
+
+SELECT * FROM bajka INNER JOIN postac ON bajka.id = postac.bajka_id;
+inaczej:
+SELECT * FROM bajka, postac WHERE bajka.id = postac.bajka_id;
+
+
+Wybieranie kolumn:
+SELECT bajka.tytul, postac.imie FROM bajka INNER JOIN postac ON bajka.id = postac.bajka_id;
 
