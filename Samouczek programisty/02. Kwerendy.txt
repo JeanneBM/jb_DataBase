@@ -234,3 +234,48 @@ SELECT * FROM bajka, postac WHERE bajka.id = postac.bajka_id;
 Wybieranie kolumn:
 SELECT bajka.tytul, postac.imie FROM bajka INNER JOIN postac ON bajka.id = postac.bajka_id;
 
+
+OUTER JOIN:
+
+LEFT OUTER JOIN,
+RIGHT OUTER JOIN,
+FULL OUTER JOIN.
+
+LEFT OUTER JOIN:
+SELECT * FROM bajka LEFT OUTER JOIN postac ON bajka.id = postac.bajka_id;
+LEFT OUTER JOIN zwraca:
+- wiersze dla których warunek złączenia jest spełniony,
+- wiersze z “lewej tabeli” dla których nie ma odpowiedników w prawej (*bajka* LEFT OUTER JOIN postac).
+
+z ograniczeniem kolumn:
+SELECT bajka.tytul,postac.imie FROM bajka LEFT OUTER JOIN postac ON bajka.id = postac.bajka_id;
+
+RIGHT OUTER JOIN:
+SELECT * FROM bajka RIGHT OUTER JOIN postac ON bajka.id = postac.bajka_id;
+RIGHT OUTER JOIN zwraca:
+- wiersze dla których warunek złączenia jest spełniony,
+- wiersze z “prawej tabeli” dla których nie ma odpowiedników w lewej (bajka RIGHT OUTER JOIN *postac*).
+
+FULL OUTER JOIN:
+SELECT * FROM bajka FULL OUTER JOIN postac ON bajka.id = postac.bajka_id;
+FULL OUTER JOIN jest złączeniem które zwraca:
+- wiersze dla których warunek złączenia jest spełniony,
+- wiersze z “lewej tabeli” dla których nie ma odpowiedników w prawej (*bajka* LEFT OUTER JOIN postac),
+- wiersze z “prawej tabeli” dla których nie ma odpowiedników w lewej (bajka RIGHT OUTER JOIN *postac*).
+
+FULL OUTER JOIN inaczej:
+SELECT * FROM bajka LEFT OUTER JOIN postac ON bajka.id = postac.bajka_id UNION ALL SELECT bajka.*, postac.* FROM postac LEFT OUTER 
+ JOIN bajka ON bajka.id = postac.bajka_id WHERE bajka.id is NULL;
+
+JOIN:
+JOIN to samo co INNER JOIN,
+LEFT JOIN to samo co LEFT OUTER JOIN,
+RIGHT JOIN to samo co RIGHT OUTER JOIN,
+FULL JOIN to samo co FULL OUTER JOIN,
+CROSS JOIN to samo co iloczyn kartezjański.
+
+
+
+
+
+
