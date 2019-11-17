@@ -322,8 +322,17 @@ SELECT * FROM track WHERE milliseconds < ALL (SELECT milliseconds FROM track);
 inaczej:
 SELECT * FROM track WHERE milliseconds < (SELECT MAX(milliseconds) FROM track);
 
+
 Podzapytania wewnątrz klauzuli ORDER BY:
  SELECT * FROM artist ORDER BY (SELECT MAX(albumid) FROM album WHERE artist.artistid = album.artistid);
  
  
+Podzapytania wewnątrz klauzuli LIMIT:
+SELECT * FROM album LIMIT (SELECT COUNT(*) FROM artist);
+
+
+Podzapytania wewnątrz klauzuli HAVING:
+SELECT customerid, SUM(total) AS sum_total FROM invoice GROUP BY customerid HAVING sum_total > (SELECT SUM(total) FROM invoice
+                                                                                                      WHERE billingstate = 'WA');
+                                                                                                      
 
