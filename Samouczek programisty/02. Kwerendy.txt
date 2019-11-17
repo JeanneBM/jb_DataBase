@@ -276,8 +276,54 @@ CROSS JOIN to samo co iloczyn kartezjański.
 
 
 Podzapytania:
+SELECT * FROM (SELECT 1);
+SELECT name FROM artist WHERE artistid IN (SELECT artistid FROM album GROUP BY artistid HAVING COUNT(*) > 10); nazwy artystów, którzy 
+opublikowali więcej niż dziesięć albumów
+
+Podzapytania skorelowane:
+SELECT trackid, albumid, name FROM track AS outer_track WHERE milliseconds > (SELECT 10 * MIN(milliseconds) FROM track AS inner_track
+                                                                              WHERE inner_track.albumid = outer_track.albumid);
+                                                                              
+Podzapytanie wewnątrz listy pobieranych wartości:
+SELECT customerid, total, (SELECT AVG(total) FROM invoice) AS avg_total FROM invoice ORDER BY customerid LIMIT 14;
 
 
+Używanie aliasów jest konieczne, gdy podzapytanie musi bazować na kolumnie dostępnej w zapytaniu głównym:
+SELECT customerid, total, (SELECT AVG(total) FROM invoice AS subquery_invoice WHERE subquery_invoice.customerid = query_invoice.customerid) AS 
+avg_total FROM invoice AS query_invoice ORDER BY customerid LIMIT 14;
+
+Podzapytanie wewnątrz klauzuli FROM
+SELECT AVG(customer_total) FROM (SELECT SUM(total) AS customer_total FROM invoice GROUP BY customerid);
+SELECT invoiceid, total, invoice.billingstate, billingstate_avg.state_avg FROM (SELECT billingstate, AVG(total) AS state_avg FROM invoice
+      GROUP BY billingstate) AS billingstate_avg JOIN invoice ON billingstate_avg.billingstate = invoice.billingstate;
+
+Podzapytania wewnątrz klauzuli WHERE:
+SELECT trackid, name, milliseconds FROM track WHERE milliseconds < (SELECT 10 * MIN(milliseconds) FROM track);
+SELECT trackid, name FROM track WHERE mediatypeid IN (SELECT mediatypeid FROM mediatype WHERE name LIKE '%AAC%');
+SELECT albumid, name, milliseconds FROM track AS outer_track WHERE milliseconds < (SELECT AVG(milliseconds) FROM track AS inner_track
+                                                                                     WHERE inner_track.albumid = outer_track.albumid);
+
+Operator EXISTS:
+zwrócone są wyłącznie te wiersze, dla których podzapytanie zwróci co najmniej jeden wiersz
+SELECT * FROM employee AS outer_employee WHERE EXISTS (SELECT * FROM employee AS inner_empolyee WHERE inner_employee.reportsto = 
+                                                                                                                    outer_employee.employeeid);
+W tym przypadku skorelowane podzapytanie zwraca wiersze, które połączone są relacją szef-podwładny. Wiersze, które zawierają pracowników 
+nie posiadających podwładnych są pominięte. Dzieje się tak dlatego, że podzapytanie w ich przypadku nie zwróci ani jednego wiersza.
 
 
+Operatory ALL i ANY:
+Nie są obsługiwane przez bazę SQLite.
+Używa się w połączeniu z operatorami porównania z klauzuli WHERE.
+Na przykład wyrażenie kolumna > ALL (podzapytanie) oznacza, że kolumna musi mieć większą wartość niż wszystkie wartości zwrócone przez 
+podzapytanie.
+Chociaż SQLite nie wspiera tych operatorów identyczne zachowanie można uzyskać stosując funkcje MIN albo MAX. 
+
+SELECT * FROM track WHERE milliseconds < ALL (SELECT milliseconds FROM track);
+inaczej:
+SELECT * FROM track WHERE milliseconds < (SELECT MAX(milliseconds) FROM track);
+
+Podzapytania wewnątrz klauzuli ORDER BY:
+ SELECT * FROM artist ORDER BY (SELECT MAX(albumid) FROM album WHERE artist.artistid = album.artistid);
+ 
+ 
 
