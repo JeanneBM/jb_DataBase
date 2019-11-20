@@ -335,4 +335,35 @@ Podzapytania wewnątrz klauzuli HAVING:
 SELECT customerid, SUM(total) AS sum_total FROM invoice GROUP BY customerid HAVING sum_total > (SELECT SUM(total) FROM invoice
                                                                                                       WHERE billingstate = 'WA');
                                                                                                       
+Przykładowe zadania:
 
+Napisz zapytanie używając podzapytań, które zwróci:
+1. sumaryczną wartość (kolumna total) faktur (tabela invoice), których kwota jest powyżej średniej wartości wszystkich faktur,
+
+SELECT SUM(total) FROM invoice WHERE total > (SELECT AVG(total) FROM invoice);
+
+2. średnią liczbę albumów (tabela album) dla artystów, którzy opublikowali więcej niż dwa albumy,
+
+SELECT AVG(how_many) FROM (SELECT COUNT(*) AS how_many FROM album GROUP BY artistid HAVING how_many > 2); 
+
+3. wiersze zawierające identyfikator klienta (kolumna customerid) i wartość faktur ponad średnią wartość faktur danego klienta
+(wartość - średnia). Zapytanie powinno zwrócić wyłącznie wiersze gdzie ta różnica jest większa od 0,
+te same wyniki, które zwraca zapytanie poniżej bez użycia klauzuli JOIN:
+SELECT name FROM artist JOIN album ON artist.artistid = album.artistid GROUP BY name HAVING COUNT(*) > 10;
+
+SELECT customerid, (total - (SELECT AVG(total) FROM invoice AS i2 WHERE i1.customerid = i2.customerid)) AS above_average FROM invoice AS i1
+ WHERE above_average > 0;
+ 
+4. te same wyniki, które zwraca zapytanie poniżej bez użycia klauzuli JOIN:
+SELECT name FROM artist JOIN album ON artist.artistid = album.artistid GROUP BY name HAVING COUNT(*) > 10;
+
+SELECT name FROM artist WHERE artistid IN (SELECT artistid FROM album GROUP BY artistid HAVING COUNT(*) > 10);
+
+5.te same wyniki, które zwraca zapytanie poniżej bez użycia klauzuli JOIN:
+SELECT invoiceid, total, invoice.billingstate, billingstate_avg.state_avg FROM (SELECT billingstate, AVG(total) AS state_avg
+ FROM invoice GROUP BY billingstate) AS billingstate_avg JOIN invoice ON billingstate_avg.billingstate = invoice.billingstate;
+  
+SELECT invoiceid, total, billingstate, (SELECT AVG(total) AS state_avg FROM invoice WHERE billingstate = outer.billingstate)
+ FROM invoice AS outer WHERE billingstate IS NOT NULL;
+
+  
