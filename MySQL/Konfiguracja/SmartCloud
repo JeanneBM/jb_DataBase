@@ -1,0 +1,79 @@
+SmartCloud Control Desk wersja 7.5
+
+Usługę Microsoft SQL Server można samodzielnie skonfigurować na potrzeby produktu SmartCloud Control Desk.
+Zanim rozpoczniesz
+
+Ponieważ produktu Microsoft SQL Server nie obsługuje kodowania UTF-8, produkt SmartCloud Control Desk nie zapewnia obsługi wielu języków w przypadku wdrożenia wraz z produktem Microsoft SQL Server.
+Porządkowanie w bazie danych Microsoft SQL Server musi być ustawione na następujące opcje:
+
+    Kolejność słownika
+    Bez rozróżniania wielkości liter
+    Do użytku z zestawem znaków 1252
+
+O tym zadaniu
+
+Aby skonfigurować istniejący serwer Microsoft SQL Server do użytku z produktem SmartCloud Control Desk, należy wykonać następujące kroki przed uruchomieniem programu instalacyjnego produktu SmartCloud Control Desk:
+Procedura
+
+    Skonfiguruj port nasłuchiwania.
+
+    Jeśli domyślna instancja silnika bazy danych Microsoft SQL Server nasłuchuje na porcie TCP 1433. Nazwane instancje silnika bazy danych Microsoft SQL Server i produktu Microsoft SQL Server Compact Edition są skonfigurowane dla portów dynamicznych, co oznacza, że po uruchomieniu usługi wybierają dowolny dostępny port. W przypadku nawiązania połączenia z nazwaną instancją przez firewall należy skonfigurować silnik bazy danych w taki sposób, aby nasłuchiwał na konkretnym porcie, a następnie należy otworzyć ten port w firewallu.
+        Wybierz opcje Programy > Microsoft SQL Server 2008 > Configuration Tools > SQL Server Configuration Manager
+        Na panelu nawigacyjnym menedżera konfiguracji Microsoft SQL Server rozwiń węzły Konfiguracja sieciowa serwera SQL > Protokoły dla <nazwa instancji>,, a następnie kliknij dwukrotnie TCP/IP.
+        W oknie dialogowym właściwości TCP/IP kliknij kartę adresów IP.
+        Dla każdego adresu IP z listy upewnij się, ze pole dynamicznych portów TCP jest puste. Jeśli pole Dynamiczne porty TCP zawiera wartość 0, oznacza to, że konkretny adres IP korzysta z portów dynamicznych. Ponieważ produkt SmartCloud Control Desk wymaga, aby serwer Microsoft SQL Server nasłuchiwał na porcie statyczny, dlatego to pole musi być puste.
+        Dla każdego adres IP z na liście wprowadź 1433 do pola Port TCP.
+        Kliknij przycisk OK.
+        Na panelu nawigacyjnym menedżera konfiguracji serwera SQL kliknij opcję Usługi serwera SQL.
+        Kliknij prawym przyciskiem myszy SQL Server (<nazwa instancji>), a następnie kliknij przycisk Restart, aby zatrzymać i zrestartować Microsoft SQL Server.
+        Upewnij się, że instancja Microsoft SQL Server jest uruchomiona, a następnie zamknij menedżera konfiguracji SQL Server.
+    Podczas instalowania Microsoft SQL Server 2008 upewnij się, że włączona jest opcja wyszukiwania pełnotekstowego. Aby sprawdzić, czy w istniejącej bazie danych Microsoft SQL Server jest zainstalowana opcja wyszukiwania pełnotekstowego, wykonaj następujące czynności:
+        Uruchom narzędzie SQL Server Management Studio, jako typ uwierzytelniania wybierz opcję SQL Server Authentication (Uwierzytelnianie SQL Server), wprowadź referencje dla ID użytkownika sa, a następnie kliknij opcję Connect (Połącz).
+        Kliknij przycisk New Query (Nowa kwerenda).
+        Wpisz następującą komendę:
+
+        select FULLTEXTSERVICEPROPERTY ( 'IsFulltextInstalled' )
+        Kopiuj
+
+        Jeśli nie zainstalowano opcji wyszukiwania pełnotekstowego (wartość wynikowa to zero), wówczas należy ją zainstalować teraz. Aby zainstalować opcję wyszukiwania pełnotekstowego, wczytaj do systemu nośnik produktu Microsoft SQL Server 2008 i uruchom kreatora instalacji. Wykonaj kroki w kreatorze i włącz opcję wyszukiwania pełnotekstowego, która znajduje się w panelu ustawień niestandardowych w oknie dialogowym typu instalacji. Aby zakończyć proces instalowania, zrestartuj serwer.
+    Utwórz bazę danych Microsoft SQL Server.
+        Uruchom program SQL Server Management Studio (Start > Programy > Microsoft SQL Server 2008 > SQL Server Management Studio)
+        W drzewie nawigacyjnym kliknij prawym przyciskiem myszy folder Databases (Bazy danych) i wybierz opcję New Database (Nowa baza danych).
+        W polu wprowadzania Database name (Nazwa bazy danych) określ unikalną nazwę bazy danych (na przykład maxdb75)
+        Dla nazwy logicznej maxdb75 zmień atrybut rozmiaru początkowego (MB) na 500 (MB), a ponadto ustaw wartość pola Autogrowth (Wzrost automatyczny) na By 1MB, unrestricted growth (O 1 MB, bez ograniczeń).
+        W razie potrzeby zmodyfikuj ustawienia dziennika, aby dostosować je do środowiska produkcyjnego.
+        Kliknij przycisk OK.
+    Utwórz użytkownika Maximo dla Microsoft SQL Server.
+        Uruchom program Microsoft SQL Server Management Studio (Start > Programy > Microsoft SQL Server 2008 > SQL Server Management Studio)
+        Kliknij przycisk New Query (Nowa kwerenda).
+        W menu Available Databases (Dostępne bazy danych) Wybierz bazę danych SmartCloud Control Desk (maxdb75).
+        Wprowadź poniższy skrypt, aby utworzyć użytkownika MAXIMO (bazy danych Maximo) z hasłem MAXIMO.
+
+        sp_addlogin MAXIMO,MAXIMO
+        go
+        Kopiuj
+
+        W tej wartości rozróżniana jest wielkość liter.
+        Kliknij przycisk Execute (Wykonaj).
+        Wprowadź następujący skrypt, aby zmienić osobę odpowiedzialną za bazę danych na maximo.
+
+        sp_changedbowner MAXIMO
+        go
+        Kopiuj
+
+        Kliknij przycisk Execute (Wykonaj).
+
+Co dalej
+
+Jeśli do bazy danych zostaną dodane dodatkowe nazwy logiczne, a ich grupa plików zostanie ustawiona na wartość inną niż PRIMARY, wówczas po skonfigurowaniu bazy danych i utworzeniu użytkownika Maximo należy wykonać poniższe kroki:
+
+    Uruchom program instalacyjny produktu SmartCloud Control Desk i wybierz opcję Nie wykonuj teraz tego kroku konfiguracji.
+    Dodaj następującą właściwość do pliku katalog_główny_instalacji\etc\install.properties:
+
+    Database.SQL.DataFilegroupName=<nazwa logiczna>
+    Kopiuj
+
+    Wykonaj kroki konfiguracji poza programem instalacyjnym produktu SmartCloud Control Desk korzystając z programu narzędziowego taskrunner, który jest dostępny w katalogu katalog_główny_instalacji\scripts.
+
+Dodatkowe kroki można wykonać tylko wówczas, gdy do bazy danych dodano dodatkowe nazwy logiczne, a ich grupę plików ustawiono na wartość inną niż PRIMARY.
+
