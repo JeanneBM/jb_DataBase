@@ -1,0 +1,28 @@
+
+SELECT * FROM Klienci;
+
+SELECT *
+FROM Klienci;
+
+SELECT
+-- to jest pierwszy komentarz
+ImięKlienta,
+NazwiskoKlienta -- to jest drugi komentarz
+FROM Klienci;
+
+SELECT
+/* to jest pierwszy komentarz */
+ImięKlienta,
+NazwiskoKlienta /*to jest drugi komentarz
+to jest dalsza część drugiego komentarza
+tutaj znajduje się koniec drugiego komentarza */
+FROM Klienci;
+
+SELECT NazwiskoKlienta
+FROM Klienci;
+
+SELECT
+ImięKlienta,
+NazwiskoKlienta
+FROM Klienci;
+
