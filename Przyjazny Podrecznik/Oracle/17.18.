@@ -1,0 +1,69 @@
+INSERT INTO Kontrahenci
+(ImięKontrahenta, NazwiskoKontrahenta, Województwo)
+VALUES
+('Klaudia', 'Dawidowska', 'ZPM');
+
+INSERT INTO Kontrahenci
+(ImięKontrahenta, NazwiskoKontrahenta, Województwo)
+VALUES
+('Irena', 'Krause', 'OPO');
+
+INSERT INTO Kontrahenci
+(ImięKontrahenta, NazwiskoKontrahenta)
+VALUES
+('Dawid', 'Grabowski');
+
+INSERT INTO Kontrahenci
+(ImięKontrahenta, NazwiskoKontrahenta, Województwo)
+SELECT
+Nazwa1,
+Nazwa2,
+Województwo
+FROM NowiKontrahenci
+WHERE Województwo = 'PKR';
+
+DELETE
+FROM Kontrahenci
+WHERE Województwo = 'PKR';
+
+SELECT
+COUNT (*)
+FROM Kontrahenci
+WHERE Województwo = 'PKR';
+
+UPDATE Dostawcy
+SET Dostawcy.Województwo =
+(SELECT ZmianaDanychDostawców.Województwo
+FROM ZmianaDanychDostawców
+WHERE Dostawcy.IDDostawcy = ZmianaDanychDostawców.IDDostawcy),
+Dostawcy.KodPocztowy =
+(SELECT ZmianaDanychDostawców.KodPocztowy
+FROM ZmianaDanychDostawców
+WHERE Dostawcy.IDDostawcy = ZmianaDanychDostawców.IDDostawcy)
+WHERE EXISTS
+(SELECT *
+FROM ZmianaDanychDostawców
+WHERE Dostawcy.IDDostawcy = ZmianaDanychDostawców.IDDostawcy);
+
+
+ ROZDZIAŁ 18
+
+
+CREATE TABLE MojaTabela
+(Kolumna_1 INT PRIMARY KEY NOT NULL,
+Kolumna_2 INT NULL,
+Kolumna_3 VARCHAR(25) NULL,
+Kolumna_4 FLOAT DEFAULT 10 NULL,
+CONSTRAINT "KluczObcy" FOREIGN KEY(Kolumna_2)
+REFERENCES PowiązanaTabela (PierwszaKolumna)
+ON DELETE SET NULL);
+
+ALTER TABLE MojaTabela
+DROP COLUMN Kolumna_3;
+
+CREATE INDEX Indeks2
+ON MojaTabela (Kolumna_4);
+
+DROP INDEX Indeks2;
+
+DROP TABLE MojaTabela;
