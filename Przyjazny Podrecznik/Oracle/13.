@@ -1,0 +1,60 @@
+SELECT
+Pracownicy.Pracownik AS "Imię i nazw. pracownika",
+Przełożeni.Pracownik AS "Imię i nazw. przełożonego"
+FROM Kadry Pracownicy
+INNER JOIN Kadry Przełożeni
+ON Pracownicy.IDPrzełożonego = Przełożeni.IDPracownika
+ORDER BY Pracownicy.Pracownik;
+
+SELECT
+Pracownicy.Pracownik AS "Imię i nazw. pracownika",
+Przełożeni.Pracownik AS "Imię i nazw. przełożonego"
+FROM Kadry Pracownicy
+LEFT JOIN Kadry Przełożeni
+ON Pracownicy.IDPrzełożonego = Przełożeni.IDPracownika
+ORDER BY Pracownicy.Pracownik;
+
+SELECT
+Klienci.ImięKlienta AS "Imię klienta",
+Klienci.NazwiskoKlienta AS "Nazwisko klienta",
+Zamówienia.DataZamówienia AS "Data zamówienia",
+Zamówienia.KwotaZamówienia AS "Kwota zamówienia",
+Zwroty.DataZwrotu AS "Data zwrotu",
+Zwroty.KwotaZwrotu AS "Kwota zwrotu"
+FROM Klienci
+LEFT JOIN Zamówienia
+ON Klienci.IDKlienta = Zamówienia.IDKlienta
+LEFT JOIN Zwroty
+ON Zamówienia.IDZamówienia = Zwroty.IDZamówienia
+ORDER BY Klienci.NazwiskoKlienta, Klienci.ImięKlienta, Zamówienia.DataZamówienia;
+
+CREATE VIEW KlienciZamówieniaZwroty AS
+SELECT
+Klienci.ImięKlienta AS "Imię klienta",
+Klienci.NazwiskoKlienta AS "Nazwisko klienta",
+Zamówienia.DataZamówienia AS "Data zamówienia",
+Zamówienia.KwotaZamówienia AS "Kwota zamówienia",
+Zwroty.DataZwrotu AS "Data zwrotu",
+Zwroty.KwotaZwrotu AS "Kwota zwrotu"
+FROM Klienci
+LEFT JOIN Zamówienia
+ON Klienci.IDKlienta = Zamówienia.IDKlienta
+LEFT JOIN Zwroty
+ON Zamówienia.IDZamówienia = Zwroty.IDZamówienia;
+
+SELECT *
+FROM KlienciZamówieniaZwroty;
+
+SELECT *
+FROM KlienciZamówieniaZwroty
+ORDER BY "Nazwisko klienta", "Imię klienta", "Data zamówienia";
+
+SELECT
+"Imię klienta",
+"Nazwisko klienta",
+"Data zamówienia"
+FROM KlienciZamówieniaZwroty
+WHERE "Nazwisko klienta" = 'Wieczorek';
+
+DROP VIEW KlienciZamówieniaZwroty;
+
