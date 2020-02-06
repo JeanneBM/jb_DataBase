@@ -1,0 +1,50 @@
+SELECT
+DataZamówienia AS "Data",
+'Zamówienie' AS "Rodzaj",
+KwotaZamówienia AS "Kwota"
+FROM Zamówienia
+WHERE IDKlienta = 2
+UNION
+SELECT
+DataZwrotu as "Data",
+'Zwrot' AS "Rodzaj",
+KwotaZwrotu AS "Kwota"
+FROM ZwrotyTowarów
+WHERE IDKlienta = 2
+ORDER BY "Data";
+
+SELECT
+DataZamówienia AS "Data"
+FROM Zamówienia
+UNION
+SELECT
+DataZwrotu as "Data"
+FROM ZwrotyTowarów
+ORDER BY "Data";
+
+SELECT
+DataZamówienia AS "Data"
+FROM Zamówienia
+UNION ALL
+SELECT
+DataZwrotu as "Data"
+FROM ZwrotyTowarów
+ORDER BY "Data";
+
+SELECT
+DataZamówienia AS "Data"
+FROM Zamówienia
+INTERSECT
+SELECT
+DataZwrotu as "Data"
+FROM ZwrotyTowarów
+ORDER BY "Data";
+
+SELECT
+DataZamówienia AS "Data"
+FROM Zamówienia
+MINUS
+SELECT
+DataZwrotu as "Data"
+FROM ZwrotyTowarów
+ORDER BY "Data";
