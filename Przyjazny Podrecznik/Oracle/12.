@@ -1,0 +1,56 @@
+SELECT
+Klienci.ImięKlienta AS "Imię klienta",
+Klienci.NazwiskoKlienta AS "Nazwisko klienta",
+Zamówienia.DataZamówienia AS "Data zamówienia",
+Zamówienia.KwotaZamówienia AS "Kwota zamówienia",
+Zwroty.DataZwrotu AS "Data zwrotu",
+Zwroty.KwotaZwrotu AS "Kwota zwrotu"
+FROM Klienci
+LEFT JOIN Zamówienia
+ON Klienci.IDKlienta = Zamówienia.IDKlienta
+LEFT JOIN Zwroty
+ON Zamówienia.IDZamówienia = Zwroty.IDZamówienia
+ORDER BY Klienci.NazwiskoKlienta, Klienci.ImięKlienta, Zamówienia.DataZamówienia;
+
+SELECT
+Klienci.ImięKlienta AS "Imię klienta",
+Klienci.NazwiskoKlienta AS "Nazwisko klienta",
+Zamówienia.DataZamówienia AS "Data zamówienia",
+Zamówienia.KwotaZamówienia AS "Kwota zamówienia"
+FROM Klienci
+LEFT JOIN Zamówienia
+ON Klienci.IDKlienta = Zamówienia.IDKlienta
+LEFT JOIN Zwroty
+ON Zamówienia.IDZamówienia = Zwroty.IDZamówienia
+WHERE Zamówienia.IDZamówienia IS NOT NULL
+AND Zwroty.IDZwrotu IS NULL
+ORDER BY Klienci.NazwiskoKlienta, Klienci.ImięKlienta, Zamówienia.DataZamówienia;
+
+SELECT
+OpisKlasyfikacji AS "Opis klasyfikacji filmu",
+TytułFilmu AS "Tytuł filmu"
+FROM Filmy
+FULL JOIN KlasyfikacjaFilmów
+ON Filmy.Klasyfikacja = KlasyfikacjaFilmów.Klasyfikacja
+ORDER BY OpisKlasyfikacji, TytułFilmu;
+
+SELECT
+Rozmiar,
+Kolor
+FROM RozmiaryKoszulek
+CROSS JOIN KoloryKoszulek;
+
+SELECT
+Rozmiar,
+Kolor
+FROM RozmiaryKoszulek, KoloryKoszulek;
+
+SELECT
+IDZamówienia AS "ID zamówienia",
+DataZamówienia AS "Data zamówienia",
+KwotaZamówienia AS "Kwota zamówienia"
+FROM Zamówienia
+CROSS JOIN KluczoweDaty
+WHERE DataZamówienia = OstatniaDataPrzetwarzania;
+
+
