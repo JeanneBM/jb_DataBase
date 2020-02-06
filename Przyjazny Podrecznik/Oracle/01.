@@ -1,0 +1,699 @@
+
+SKRYPT DO TWORZENIA TABEL I UMIESZCZANIA W NICH DANYCH
+
+
+-- Tabela Klienci:
+
+DROP TABLE Klienci;
+
+CREATE TABLE Klienci
+(IDKlienta INT NOT NULL,
+ImięKlienta VARCHAR(30) NULL,
+NazwiskoKlienta VARCHAR(30) NULL);
+
+INSERT INTO Klienci (IDKlienta, ImięKlienta, NazwiskoKlienta)
+VALUES (1, 'Sylwia', 'Dudziak');
+
+INSERT INTO Klienci (IDKlienta, ImięKlienta, NazwiskoKlienta)
+VALUES (2, 'Ryszard', 'Wieczorek');
+
+INSERT INTO Klienci (IDKlienta, ImięKlienta, NazwiskoKlienta)
+VALUES (3, 'Paweł', 'Janas');
+
+INSERT INTO Klienci (IDKlienta, ImięKlienta, NazwiskoKlienta)
+VALUES (4, 'Szymon', 'Majkowski');
+
+-- Tabela Sprzedaż:
+
+DROP TABLE Sprzedaż;
+
+CREATE TABLE Sprzedaż
+(IDSprzedaży INT NOT NULL,
+ImięKlienta VARCHAR(30) NULL,
+NazwiskoKlienta VARCHAR(30) NULL,
+ZakupionaIlość INT NULL,
+CenaZaSztukę FLOAT NULL);
+
+INSERT INTO Sprzedaż (IDSprzedaży, ImięKlienta, NazwiskoKlienta, ZakupionaIlość, CenaZaSztukę)
+VALUES (1, 'Andrzej', 'Lipkowski', 4, 2.5);
+
+INSERT INTO Sprzedaż (IDSprzedaży, ImięKlienta, NazwiskoKlienta, ZakupionaIlość, CenaZaSztukę)
+VALUES (2, 'Karolina', 'Bielska', 10, 1.25);
+
+INSERT INTO Sprzedaż (IDSprzedaży, ImięKlienta, NazwiskoKlienta, ZakupionaIlość, CenaZaSztukę)
+VALUES (3, 'Janusz', 'Solecki', 5, 4);
+
+-- Tabela Produkty:
+
+DROP TABLE Produkty;
+
+CREATE TABLE Produkty
+(IDProduktu INT NOT NULL,
+Opis VARCHAR(30) NULL,
+Waga INT NULL);
+
+INSERT INTO Produkty (IDProduktu, Opis)
+VALUES (1, 'Drukarka A');
+
+INSERT INTO Produkty (IDProduktu, Opis, Waga)
+VALUES (2, 'Drukarka B', 0);
+
+INSERT INTO Produkty (IDProduktu, Opis, Waga)
+VALUES (3, 'Monitor C', 2);
+
+INSERT INTO Produkty (IDProduktu, Opis, Waga)
+VALUES (4, 'Laptop D', 4);
+
+-- Tabela Sprzedawcy:
+
+DROP TABLE Sprzedawcy;
+
+CREATE TABLE Sprzedawcy
+(IDSprzedawcy INT NOT NULL,
+ImięSprzedawcy VARCHAR(30) NULL,
+NazwiskoSprzedawcy VARCHAR(30) NULL);
+
+INSERT INTO Sprzedawcy (IDSprzedawcy, ImięSprzedawcy, NazwiskoSprzedawcy)
+VALUES (1, 'Grzegorz', 'Dubiel');
+
+INSERT INTO Sprzedawcy (IDSprzedawcy, ImięSprzedawcy, NazwiskoSprzedawcy)
+VALUES (2, 'Karolina', 'Dubiel');
+
+INSERT INTO Sprzedawcy (IDSprzedawcy, ImięSprzedawcy, NazwiskoSprzedawcy)
+VALUES (3, 'Natalia', 'Lipska');
+
+INSERT INTO Sprzedawcy (IDSprzedawcy, ImięSprzedawcy, NazwiskoSprzedawcy)
+VALUES (4, 'Justyna', 'Kowalska');
+
+-- Tabela SortowanieDanych:
+
+DROP TABLE SortowanieDanych;
+
+CREATE TABLE SortowanieDanych
+(IDTabeli INT NOT NULL,
+DaneZnakowe VARCHAR(30) NULL,
+DaneLiczbowe INT NULL);
+
+INSERT INTO SortowanieDanych (IDTabeli, DaneZnakowe, DaneLiczbowe)
+VALUES (1, '23', 23);
+
+INSERT INTO SortowanieDanych (IDTabeli, DaneZnakowe, DaneLiczbowe)
+VALUES (2, '5', 5);
+
+INSERT INTO SortowanieDanych (IDTabeli, DaneZnakowe)
+VALUES (3, 'Pies');
+
+INSERT INTO SortowanieDanych (IDTabeli, DaneLiczbowe)
+VALUES (4, -6);
+
+-- Tabela Książki:
+
+DROP TABLE Książki;
+
+CREATE TABLE Książki
+(IDKsiążki INT NOT NULL,
+Tytuł VARCHAR(30) NULL,
+Autor VARCHAR (30) NULL,
+SprzedażWBieżącymMiesiącu INT NULL);
+
+INSERT INTO Książki (IDKsiążki, Tytuł, Autor, SprzedażWBieżącymMiesiącu) VALUES (1, 'Duma i uprzedzenie', 'Austen', 15);
+
+INSERT INTO Książki (IDKsiążki, Tytuł, Autor, SprzedażWBieżącymMiesiącu) VALUES (2, 'Folwark zwierzęcy', 'Orwell', 7);
+
+INSERT INTO Książki (IDKsiążki, Tytuł, Autor, SprzedażWBieżącymMiesiącu) VALUES (3, 'Kupiec wenecki', 'Szekspir', 5);
+
+INSERT INTO Książki (IDKsiążki, Tytuł, Autor, SprzedażWBieżącymMiesiącu) VALUES (4, 'Romeo i Julia', 'Szekspir', 8);
+
+INSERT INTO Książki (IDKsiążki, Tytuł, Autor, SprzedażWBieżącymMiesiącu) VALUES (5, 'Oliver Twist', 'DIckens', 3);
+
+INSERT INTO Książki (IDKsiążki, Tytuł, Autor, SprzedażWBieżącymMiesiącu) VALUES (6, 'Kandyd', 'Wolter', 9);
+
+INSERT INTO Książki (IDKsiążki, Tytuł, Autor, SprzedażWBieżącymMiesiącu) VALUES (7, 'Szkarłatna litera', 'Hawthorne', 12);
+
+INSERT INTO Książki (IDKsiążki, Tytuł, Autor, SprzedażWBieżącymMiesiącu) VALUES (8, 'Hamlet', 'Szekspir', 2);
+
+-- Tabela Filmy:
+
+DROP TABLE Filmy;
+
+CREATE TABLE Filmy
+(IDFilmu INT NOT NULL,
+TytułFilmu VARCHAR(35) NULL,
+Klasyfikacja VARCHAR(30) NULL);
+
+INSERT INTO Filmy (IDFilmu, TytułFilmu, Klasyfikacja) VALUES (1, 'To właśnie miłość', 'R');
+
+INSERT INTO Filmy (IDFilmu, TytułFilmu, Klasyfikacja) VALUES (2, 'Północ – północny zachód', 'brak kategorii');
+
+INSERT INTO Filmy (IDFilmu, TytułFilmu, Klasyfikacja) VALUES (3, 'Miłość i śmierć', 'PG');
+
+INSERT INTO Filmy (IDFilmu, TytułFilmu, Klasyfikacja) VALUES (4, 'Truman Show', 'PG');
+
+INSERT INTO Filmy (IDFilmu, TytułFilmu, Klasyfikacja) VALUES (5, 'Taka miłość się nie zdarza', 'R');
+
+INSERT INTO Filmy (IDFilmu, TytułFilmu, Klasyfikacja) VALUES (6, 'Do diabła z miłością', 'PG-13');
+
+INSERT INTO Filmy (IDFilmu, TytułFilmu, Klasyfikacja) VALUES (7, 'Gdzie jest Nemo?', 'G');
+
+-- Tabela Aktorzy:
+
+DROP TABLE Aktorzy;
+
+CREATE TABLE Aktorzy
+(IDAktora INT NOT NULL,
+Imię VARCHAR(30) NULL,
+Nazwisko VARCHAR(30) NULL);
+
+INSERT INTO Aktorzy (IDAktora, Imię, Nazwisko) VALUES (1, 'Cary', 'Grant');
+
+INSERT INTO Aktorzy (IDAktora, Imię, Nazwisko) VALUES (2, 'Mary', 'Steenburgen');
+
+INSERT INTO Aktorzy (IDAktora, Imię, Nazwisko) VALUES (3, 'Jon', 'Voight');
+
+INSERT INTO Aktorzy (IDAktora, Imię, Nazwisko) VALUES (4, 'Dustin', 'Hoffman');
+
+INSERT INTO Aktorzy (IDAktora, Imię, Nazwisko) VALUES (5, 'John', 'Wayne');
+
+INSERT INTO Aktorzy (IDAktora, Imię, Nazwisko) VALUES (6, 'Gary', 'Cooper');
+
+-- Tabela RejestrZamówień:
+
+DROP TABLE RejestrZamówień;
+
+CREATE TABLE RejestrZamówień
+(IDZamówienia INT NOT NULL,
+Klient VARCHAR(30) NULL,
+Województwo VARCHAR (30) NULL,
+ZakupionaIlość INT NULL,
+CenaZaSztukę FLOAT NULL);
+
+INSERT INTO RejestrZamówień (IDZamówienia, Klient, Województwo, ZakupionaIlość, CenaZaSztukę) VALUES (1, 'Andrzej Lipkowski', 'pomorskie', 4, 2.5);
+
+INSERT INTO RejestrZamówień (IDZamówienia, Klient, Województwo, ZakupionaIlość, CenaZaSztukę) VALUES (2, 'Karolina Bielska', 'mazowieckie', 10, 1.25);
+
+INSERT INTO RejestrZamówień (IDZamówienia, Klient, Województwo, ZakupionaIlość, CenaZaSztukę) VALUES (3, 'Janusz Solecki', 'wielkopolskie', 5, 4);
+
+-- Tabela ArtykułySpożywcze:
+
+DROP TABLE ArtykułySpożywcze;
+
+CREATE TABLE ArtykułySpożywcze
+(IDArtykułu INT NOT NULL,
+KodKategorii VARCHAR(5) NULL,
+Opis VARCHAR (30) NULL);
+
+INSERT INTO ArtykułySpożywcze (IDArtykułu, KodKategorii, Opis) VALUES (1, 'O', 'Jabłko');
+
+INSERT INTO ArtykułySpożywcze (IDArtykułu, KodKategorii, Opis) VALUES (2, 'O', 'Pomarańcza');
+
+INSERT INTO ArtykułySpożywcze (IDArtykułu, KodKategorii, Opis) VALUES (3, 'P', 'Musztarda');
+
+INSERT INTO ArtykułySpożywcze (IDArtykułu, KodKategorii, Opis) VALUES (4, 'W', 'Marchew');
+
+INSERT INTO ArtykułySpożywcze (IDArtykułu, KodKategorii, Opis) VALUES (5, 'N', 'Woda');
+
+-- Tabela KategorieArtykulowSpożywczych:
+/*Nazwy tabel w Oracle nie mogą przekroczyć 30 bajtów. Z uwagi na to, że polskie znaki diakrytyczne kodowane są jako dwa bajty, konieczne było ich zastąpienie innymi literami w powyższej nazwie tabeli - przyp. tłum.*/
+
+DROP TABLE KategorieArtykulowSpożywczych;
+
+CREATE TABLE KategorieArtykulowSpożywczych
+(IDArtykułu INT NOT NULL,
+Owoc VARCHAR(5) NULL,
+Warzywo VARCHAR (5) NULL,
+Przyprawa VARCHAR (5) NULL,
+Napój VARCHAR (5) NULL,
+Opis VARCHAR (30) NULL);
+
+INSERT INTO KategorieArtykulowSpożywczych (IDArtykułu, Owoc, Warzywo, Przyprawa, Napój, Opis) VALUES (1, 'X', ' ', ' ', ' ', 'Jabłko');
+
+INSERT INTO KategorieArtykulowSpożywczych (IDArtykułu, Owoc, Warzywo, Przyprawa, Napój, Opis) VALUES (2, 'X', ' ', ' ', ' ', 'Pomarańcza');
+
+INSERT INTO KategorieArtykulowSpożywczych (IDArtykułu, Owoc, Warzywo, Przyprawa, Napój, Opis) VALUES (3, ' ', ' ', 'X', ' ', 'Musztarda');
+
+INSERT INTO KategorieArtykulowSpożywczych (IDArtykułu, Owoc, Warzywo, Przyprawa, Napój, Opis) VALUES (4, ' ', 'X', ' ', ' ', 'Marchew');
+
+INSERT INTO KategorieArtykulowSpożywczych (IDArtykułu, Owoc, Warzywo, Przyprawa, Napój, Opis) VALUES (5, ' ', ' ', ' ', 'X', 'Woda');
+
+-- Tabela AmerykaPółnocna:
+
+DROP TABLE AmerykaPółnocna;
+
+CREATE TABLE AmerykaPółnocna
+(IDMiasta INT NOT NULL,
+Kraj VARCHAR(6) NULL,
+Stan VARCHAR (8) NULL,
+Prowincja VARCHAR (7) NULL,
+Miasto VARCHAR (30) NULL);
+
+INSERT INTO AmerykaPółnocna (IDMiasta, Kraj, Stan, Prowincja, Miasto) VALUES (1, 'USA', 'Vermont', ' ', 'Burlington');
+
+INSERT INTO AmerykaPółnocna (IDMiasta, Kraj, Stan, Prowincja, Miasto) VALUES (2, 'Kanada', ' ', 'Quebec', 'Montreal');
+
+INSERT INTO AmerykaPółnocna (IDMiasta, Kraj, Stan, Prowincja, Miasto) VALUES (3, 'USA', 'Kolorado', ' ', 'Denver');
+
+INSERT INTO AmerykaPółnocna (IDMiasta, Kraj, Stan, Prowincja, Miasto) VALUES (4, 'USA', 'Kolorado', ' ', 'Boulder');
+
+INSERT INTO AmerykaPółnocna (IDMiasta, Kraj, Stan, Prowincja, Miasto) VALUES (5, 'Kanada', ' ', 'Alberta', 'Edmonton');
+
+-- Tabela ListaKlientów:
+
+DROP TABLE ListaKlientów;
+
+CREATE TABLE ListaKlientów
+(IDKlienta INT NOT NULL,
+Płeć VARCHAR(5) NULL,
+Wiek INT NULL,
+Dochód INT NULL);
+
+INSERT INTO ListaKlientów (IDKlienta, Płeć, Wiek, Dochód) VALUES (1, 'M', 55, 80000);
+
+INSERT INTO ListaKlientów (IDKlienta, Płeć, Wiek, Dochód) VALUES (2, 'K', 25, 65000);
+
+INSERT INTO ListaKlientów (IDKlienta, Płeć, Wiek, Dochód) VALUES (3, 'M', 35, 40000);
+
+INSERT INTO ListaKlientów (IDKlienta, Płeć, Wiek, Dochód) VALUES (4, 'K', 42, 90000);
+
+INSERT INTO ListaKlientów (IDKlienta, Płeć, Wiek, Dochód) VALUES (5, 'K', 27, 25000);
+
+-- Tabela TytułyUtworów:
+
+DROP TABLE TytułyUtworów;
+
+CREATE TABLE TytułyUtworów
+(IDUtworu INT NOT NULL,
+Wykonawca VARCHAR(30) NULL,
+Album VARCHAR(30) NULL,
+Tytuł VARCHAR(30) NULL);
+
+INSERT INTO TytułyUtworów (IDUtworu, Wykonawca, Album, Tytuł) VALUES (1, 'The Beatles', 'Revolver', 'Yellow Submarine');
+
+INSERT INTO TytułyUtworów (IDUtworu, Wykonawca, Album, Tytuł) VALUES (2, 'The Beatles', 'Revolver', 'Eleanor Rigby');
+
+INSERT INTO TytułyUtworów (IDUtworu, Wykonawca, Album, Tytuł) VALUES (3, 'The Beatles', 'Abbey Road', 'Here Comes the Sun');
+
+INSERT INTO TytułyUtworów (IDUtworu, Wykonawca, Album, Tytuł) VALUES (4, 'The Rolling Stones', 'Beggars Banquet', 'Sympathy for the Devil');
+
+INSERT INTO TytułyUtworów (IDUtworu, Wykonawca, Album, Tytuł) VALUES (5, 'The Rolling Stones', 'Let It Bleed', 'Gimme Shelter');
+
+INSERT INTO TytułyUtworów (IDUtworu, Wykonawca, Album, Tytuł) VALUES (6, 'Paul McCartney', 'Ram', 'Too Many People');
+
+-- Tabela Opłaty:
+
+DROP TABLE Opłaty;
+
+CREATE TABLE Opłaty
+(IDOpłaty INT NOT NULL,
+Uczeń VARCHAR(30) NULL,
+RodzajOpłaty VARCHAR(30) NULL,
+Opłata INT NULL);
+
+INSERT INTO Opłaty (IDOpłaty, Uczeń, RodzajOpłaty, Opłata) VALUES (1, 'Grzegorz', 'Siłownia', 30);
+
+INSERT INTO Opłaty (IDOpłaty, Uczeń, RodzajOpłaty, Opłata) VALUES (2, 'Grzegorz', 'Obiad', 10);
+
+INSERT INTO Opłaty (IDOpłaty, Uczeń, RodzajOpłaty, Opłata) VALUES (3, 'Grzegorz', 'Wycieczka', 8);
+
+INSERT INTO Opłaty (IDOpłaty, Uczeń, RodzajOpłaty, Opłata) VALUES (4, 'Joanna', 'Siłownia', 30);
+
+INSERT INTO Opłaty (IDOpłaty, Uczeń, RodzajOpłaty, Opłata) VALUES (5, 'Julia', 'Obiad', 10);
+
+-- Tabela Punktacja:
+
+DROP TABLE Punktacja;
+CREATE TABLE Punktacja
+(IDPunktacji INT NOT NULL,
+Uczeń VARCHAR(30) NULL,
+OcenianaPraca VARCHAR(30) NULL,
+LiczbaPunktów DECIMAL NULL,
+LiczbaLatNauki INT NULL);
+
+INSERT INTO Punktacja (IDPunktacji, Uczeń, OcenianaPraca, LiczbaPunktów, LiczbaLatNauki) VALUES (1, 'Izabela', 'Sprawdzian', 92, 7);
+
+INSERT INTO Punktacja (IDPunktacji, Uczeń, OcenianaPraca, LiczbaPunktów, LiczbaLatNauki) VALUES (2, 'Izabela', 'Sprawdzian', 95, 7);
+
+INSERT INTO Punktacja (IDPunktacji, Uczeń, OcenianaPraca, LiczbaPunktów, LiczbaLatNauki) VALUES (3, 'Izabela', 'Praca domowa', 84, 7);
+
+INSERT INTO Punktacja (IDPunktacji, Uczeń, OcenianaPraca, LiczbaPunktów, LiczbaLatNauki) VALUES (4, 'Hanna', 'Sprawdzian', 62, 8);
+
+INSERT INTO Punktacja (IDPunktacji, Uczeń, OcenianaPraca, LiczbaPunktów, LiczbaLatNauki) VALUES (5, 'Hanna', 'Sprawdzian', 81, 8);
+
+INSERT INTO Punktacja (IDPunktacji, Uczeń, OcenianaPraca, LiczbaLatNauki) VALUES (6, 'Hanna', 'Praca domowa', 8);
+
+INSERT INTO Punktacja (IDPunktacji, Uczeń, OcenianaPraca, LiczbaPunktów, LiczbaLatNauki) VALUES (7, 'Piotr', 'Sprawdzian', 58, 7);
+
+INSERT INTO Punktacja (IDPunktacji, Uczeń, OcenianaPraca, LiczbaPunktów, LiczbaLatNauki) VALUES (8, 'Piotr', 'Sprawdzian', 74, 7);
+
+INSERT INTO Punktacja (IDPunktacji, Uczeń, OcenianaPraca, LiczbaPunktów, LiczbaLatNauki) VALUES (9, 'Piotr', 'Praca domowa', 88, 7);
+
+-- Tabela Akcje:
+
+DROP TABLE Akcje;
+
+CREATE TABLE Akcje
+(Skrót VARCHAR(10) NOT NULL,
+NazwaFirmy VARCHAR(30) NULL,
+NazwaGiełdy VARCHAR(10) NULL,
+StosunekCenyDoZysku INT NULL);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('AAPL', 'Apple Inc', 'NASDAQ', 14);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('AMZN', 'Amazon.com Inc', 'NASDAQ', 489);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('DIS', 'The Walt Disney Company', 'NYSE', 21);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('GE', 'General Electric Company', 'NYSE', 18);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('GOOG', 'Alphabet Inc', 'NASDAQ', 30);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('HSY', 'The Hershey Company', 'NYSE', 26);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('KRFT', 'Kraft Foods Inc', 'NYSE', 12);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('KO', 'The Coca-Cola Company', 'NYSE', 21);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('MCD', 'McDonalds Corporation', 'NYSE', 18);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('MMM', '3M Company', 'NYSE', 20);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('MSFT', 'Microsoft Corporation', 'NASDAQ', 15);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('ORCL', 'Oracle Corporation', 'NASDAQ', 17);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('SBUX', 'Starbucks Corporation', 'NASDAQ', 357);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('WBA', 'Walgreens Boots Alliance Inc', 'NYSE', 24);
+
+INSERT INTO Akcje (Skrót, NazwaFirmy, NazwaGiełdy, StosunekCenyDoZysku) VALUES ('WMT', 'Wal-Mart Stores Inc', 'NYSE', 15);
+
+-- Tabela WykazProduktów:
+
+DROP TABLE WykazProduktów;
+
+CREATE TABLE WykazProduktów
+(IDProduktu INT NOT NULL,
+Kategoria VARCHAR(30) NULL,
+Podkategoria VARCHAR(30) NULL,
+Produkt VARCHAR(30) NULL,
+LiczbaSztuk INT NULL);
+
+INSERT INTO WykazProduktów (IDProduktu, Kategoria, Podkategoria, Produkt, LiczbaSztuk) VALUES (1, 'Meble', 'Krzesła', 'Czerwony fotel', 3);
+
+INSERT INTO WykazProduktów (IDProduktu, Kategoria, Podkategoria, Produkt, LiczbaSztuk) VALUES (2, 'Meble', 'Krzesła', 'Zielony fotel', 2);
+
+INSERT INTO WykazProduktów (IDProduktu, Kategoria, Podkategoria, Produkt, LiczbaSztuk) VALUES (3, 'Meble', 'Biurka', 'Niebieskie biurko komputerowe', 4);
+
+INSERT INTO WykazProduktów (IDProduktu, Kategoria, Podkategoria, Produkt, LiczbaSztuk) VALUES (4, 'ArtykułyPapiernicze', 'PapieryDoDrukarki', 'Biały papier do drukarki', 5);
+
+INSERT INTO WykazProduktów (IDProduktu, Kategoria, Podkategoria, Produkt, LiczbaSztuk) VALUES (5, 'ArtykułyPapiernicze', 'PapieryDoDrukarki', 'Różowy papier do drukarki', 2);
+
+INSERT INTO WykazProduktów (IDProduktu, Kategoria, Podkategoria, Produkt, LiczbaSztuk) VALUES (6, 'ArtykułyPapiernicze', 'Notatniki', 'Notatnik z białymi kartkami', 4);
+
+-- Tabela ZestawienieSprzedaży:
+
+DROP TABLE ZestawienieSprzedaży;
+
+CREATE TABLE ZestawienieSprzedaży
+(DataSprzedaży DATE NULL,
+IDKlienta INT NULL,
+Województwo VARCHAR(10) NULL,
+KanałSprzedaży VARCHAR(30) NULL,
+KwotaSprzedaży INT NULL);
+
+INSERT INTO ZestawienieSprzedaży (DataSprzedaży, IDKlienta, Województwo, KanałSprzedaży, KwotaSprzedaży) VALUES (TO_DATE('2017-04-01','YYYY-MM-DD'), 101, 'MAZ', 'Internet', 50);
+
+INSERT INTO ZestawienieSprzedaży (DataSprzedaży, IDKlienta, Województwo, KanałSprzedaży, KwotaSprzedaży) VALUES (TO_DATE('2017-04-01','YYYY-MM-DD'), 102, 'MAZ', 'PunktSprzedażyDetalicznej', 30);
+
+INSERT INTO ZestawienieSprzedaży (DataSprzedaży, IDKlienta, Województwo, KanałSprzedaży, KwotaSprzedaży) VALUES (TO_DATE('2017-04-01','YYYY-MM-DD'), 103, 'PDL', 'Internet', 120);
+
+INSERT INTO ZestawienieSprzedaży (DataSprzedaży, IDKlienta, Województwo, KanałSprzedaży, KwotaSprzedaży) VALUES (TO_DATE('2017-04-02','YYYY-MM-DD'), 145, 'PDL', 'PunktSprzedażyDetalicznej', 90);
+
+INSERT INTO ZestawienieSprzedaży (DataSprzedaży, IDKlienta, Województwo, KanałSprzedaży, KwotaSprzedaży) VALUES (TO_DATE('2017-04-02','YYYY-MM-DD'), 180, 'MAZ', 'PunktSprzedażyDetalicznej', 300);
+
+INSERT INTO ZestawienieSprzedaży (DataSprzedaży, IDKlienta, Województwo, KanałSprzedaży, KwotaSprzedaży) VALUES (TO_DATE('2017-04-02','YYYY-MM-DD'), 181, 'PDL', 'Internet', 130);
+
+INSERT INTO ZestawienieSprzedaży (DataSprzedaży, IDKlienta, Województwo, KanałSprzedaży, KwotaSprzedaży) VALUES (TO_DATE('2017-04-02','YYYY-MM-DD'), 182, 'MAZ', 'Internet', 520);
+
+INSERT INTO ZestawienieSprzedaży (DataSprzedaży, IDKlienta, Województwo, KanałSprzedaży, KwotaSprzedaży) VALUES (TO_DATE('2017-04-02','YYYY-MM-DD'), 184, 'MAZ', 'PunktSprzedażyDetalicznej', 80);
+
+-- Tabela Zamówienia:
+
+DROP TABLE Zamówienia;
+
+CREATE TABLE Zamówienia
+(IDZamówienia INT NOT NULL,
+IDKlienta INT NOT NULL,
+DataZamówienia DATE NULL,
+KwotaZamówienia FLOAT NULL);
+
+INSERT INTO Zamówienia (IDZamówienia, IDKlienta, DataZamówienia, KwotaZamówienia) VALUES (1, 1, TO_DATE('2016-09-01','YYYY-MM-DD'), 10);
+
+INSERT INTO Zamówienia (IDZamówienia, IDKlienta, DataZamówienia, KwotaZamówienia) VALUES (2, 2, TO_DATE('2016-09-02','YYYY-MM-DD'), 12.5);
+
+INSERT INTO Zamówienia (IDZamówienia, IDKlienta, DataZamówienia, KwotaZamówienia) VALUES (3, 2, TO_DATE('2016-09-03','YYYY-MM-DD'), 18);
+
+INSERT INTO Zamówienia (IDZamówienia, IDKlienta, DataZamówienia, KwotaZamówienia) VALUES (4, 3, TO_DATE('2016-09-15','YYYY-MM-DD'), 20);
+
+-- Tabla Zwroty:
+
+DROP TABLE Zwroty;
+
+CREATE TABLE Zwroty
+(IDZwrotu INT NOT NULL,
+IDZamówienia INT NULL,
+DataZwrotu DATE NULL,
+KwotaZwrotu FLOAT NULL);
+
+INSERT INTO Zwroty (IDZwrotu, IDZamówienia, DataZwrotu, KwotaZwrotu) VALUES (1, 1, TO_DATE('2016-09-02','YYYY-MM-DD'), 5);
+
+INSERT INTO Zwroty (IDZwrotu, IDZamówienia, DataZwrotu, KwotaZwrotu) VALUES (2, 3, TO_DATE('2016-09-18','YYYY-MM-DD'), 18);
+
+-- Tabela KlasyfikacjaFilmów:
+
+DROP TABLE KlasyfikacjaFilmów;
+
+CREATE TABLE KlasyfikacjaFilmów
+(IDKlasyfikacji INT NOT NULL,
+Klasyfikacja VARCHAR(10) NULL,
+OpisKlasyfikacji VARCHAR(50) NULL);
+
+INSERT INTO KlasyfikacjaFilmów (IDKlasyfikacji, Klasyfikacja, OpisKlasyfikacji) VALUES (1, 'G', 'Dozwolony dla wszystkich grup wiekowych');
+
+INSERT INTO KlasyfikacjaFilmów (IDKlasyfikacji, Klasyfikacja, OpisKlasyfikacji) VALUES (2, 'PG', 'Wskazany nadzór rodzica/rodziców');
+
+INSERT INTO KlasyfikacjaFilmów (IDKlasyfikacji, Klasyfikacja, OpisKlasyfikacji) VALUES (3, 'PG-13', 'Szczególnie wskazany nadzór rodzica/rodziców');
+
+INSERT INTO KlasyfikacjaFilmów (IDKlasyfikacji, Klasyfikacja, OpisKlasyfikacji) VALUES (4, 'R', 'Film można obejrzeć jedynie z rodzicami');
+
+INSERT INTO KlasyfikacjaFilmów (IDKlasyfikacji, Klasyfikacja, OpisKlasyfikacji) VALUES (5, 'NC-17', 'Film jedynie dla osób powyżej 17. roku życia');
+
+-- Tabela RozmiaryKoszulek:
+
+DROP TABLE RozmiaryKoszulek;
+
+CREATE TABLE RozmiaryKoszulek
+(IDRozmiaru INT NOT NULL,
+Rozmiar VARCHAR(10) NULL);
+
+INSERT INTO RozmiaryKoszulek (IDRozmiaru, Rozmiar) VALUES (1, 'Mały');
+
+INSERT INTO RozmiaryKoszulek (IDRozmiaru, Rozmiar) VALUES (2, 'Średni');
+
+INSERT INTO RozmiaryKoszulek (IDRozmiaru, Rozmiar) VALUES (3, 'Duży');
+
+-- Tabela KoloryKoszulek:
+
+DROP TABLE KoloryKoszulek;
+
+CREATE TABLE KoloryKoszulek
+(IDKoloru INT NOT NULL,
+Kolor VARCHAR(10) NULL);
+
+INSERT INTO KoloryKoszulek (IDKoloru, Kolor) VALUES (1, 'Czerwony');
+
+INSERT INTO KoloryKoszulek (IDKoloru, Kolor) VALUES (2, 'Niebieski');
+
+INSERT INTO KoloryKoszulek (IDKoloru, Kolor) VALUES (3, 'Zielony');
+
+INSERT INTO KoloryKoszulek (IDKoloru, Kolor) VALUES (4, 'Żółty');
+
+-- Tabela KluczoweDaty:
+
+DROP TABLE KluczoweDaty;
+
+CREATE TABLE KluczoweDaty
+(OstatniaDataPrzetwarzania DATE NULL,
+BieżącyRokPodatkowy INT NULL,
+BieżącyKwartałPodatkowy VARCHAR(10) NULL);
+
+INSERT INTO KluczoweDaty (OstatniaDataPrzetwarzania, BieżącyRokPodatkowy, BieżącyKwartałPodatkowy) VALUES (TO_DATE('2016-09-15','YYYY-MM-DD'), 2016, 'Q3');
+
+-- Tabela Kadry:
+
+DROP TABLE Kadry;
+
+CREATE TABLE Kadry
+(IDPracownika INT NOT NULL,
+Pracownik VARCHAR(30) NULL,
+IDPrzełożonego INT NULL);
+
+INSERT INTO Kadry (IDPracownika, Pracownik) VALUES (1, 'Zuzanna Kowalska');
+
+INSERT INTO Kadry (IDPracownika, Pracownik, IDPrzełożonego) VALUES (2, 'Luiza Warecka', 1);
+
+INSERT INTO Kadry (IDPracownika, Pracownik, IDPrzełożonego) VALUES (3, 'Robert Pieczyński', 1);
+
+INSERT INTO Kadry (IDPracownika, Pracownik, IDPrzełożonego) VALUES (4, 'Sebastian Feldman', 1);
+
+INSERT INTO Kadry (IDPracownika, Pracownik, IDPrzełożonego) VALUES (5, 'Karolina Białek', 2);
+
+INSERT INTO Kadry (IDPracownika, Pracownik, IDPrzełożonego) VALUES (6, 'Joanna Borecka', 2);
+
+INSERT INTO Kadry (IDPracownika, Pracownik, IDPrzełożonego) VALUES (7, 'Juliusz Morawski', 3);
+
+INSERT INTO Kadry (IDPracownika, Pracownik, IDPrzełożonego) VALUES (8, 'Anna Adamska', 4);
+
+INSERT INTO Kadry (IDPracownika, Pracownik, IDPrzełożonego) VALUES (9, 'Jacek Śpiewak', 4);
+
+INSERT INTO Kadry (IDPracownika, Pracownik, IDPrzełożonego) VALUES (10, 'Amelia Wojnacka', 5);
+
+-- Tabela Użytkownicy:
+
+DROP TABLE Użytkownicy;
+
+CREATE TABLE Użytkownicy
+(IDUżytkownika INT NOT NULL,
+NazwaUżytkownika VARCHAR(30) NULL);
+
+INSERT INTO Użytkownicy (IDUżytkownika, NazwaUżytkownika)
+VALUES (1, 'Cecylia Romanowska');
+
+INSERT INTO Użytkownicy (IDUżytkownika, NazwaUżytkownika)
+VALUES (2, 'Elżbieta Borecka');
+
+INSERT INTO Użytkownicy (IDUżytkownika, NazwaUżytkownika)
+VALUES (3, 'Romuald Gawliński');
+
+INSERT INTO Użytkownicy (IDUżytkownika, NazwaUżytkownika)
+VALUES (4, 'Anna Wodecka');
+
+-- Tabela Transakcje:
+
+DROP TABLE Transakcje;
+
+CREATE TABLE Transakcje
+(IDTransakcji INT NOT NULL,
+IDUżytkownika INT NULL,
+KwotaTransakcji FLOAT NULL,
+SposóbZapłaty VARCHAR(20) NULL);
+
+INSERT INTO Transakcje (IDTransakcji, IDUżytkownika, KwotaTransakcji, SposóbZapłaty)
+VALUES (1, 1, 22.25, 'Gotówka');
+
+INSERT INTO Transakcje (IDTransakcji, IDUżytkownika, KwotaTransakcji, SposóbZapłaty)
+VALUES (2, 2, 11.75, 'Karta kredytowa');
+
+INSERT INTO Transakcje (IDTransakcji, IDUżytkownika, KwotaTransakcji, SposóbZapłaty)
+VALUES (3, 2, 5, 'Karta kredytowa');
+
+INSERT INTO Transakcje (IDTransakcji, IDUżytkownika, KwotaTransakcji, SposóbZapłaty)
+VALUES (4, 2, 8, 'Gotówka');
+
+INSERT INTO Transakcje (IDTransakcji, IDUżytkownika, KwotaTransakcji, SposóbZapłaty)
+VALUES (5, 3, 9.33, 'Karta kredytowa');
+
+INSERT INTO Transakcje (IDTransakcji, IDUżytkownika, KwotaTransakcji, SposóbZapłaty)
+VALUES (6, 3, 10.11, 'Karta kredytowa');
+
+-- Tabela ZwrotyTowarów:
+
+DROP TABLE ZwrotyTowarów;
+
+CREATE TABLE ZwrotyTowarów
+(IDZwrotu INT NOT NULL,
+IDKlienta INT NOT NULL,
+DataZwrotu DATE NULL,
+KwotaZwrotu FLOAT NULL);
+
+INSERT INTO ZwrotyTowarów (IDZwrotu, IDKlienta, DataZwrotu, KwotaZwrotu) VALUES (1, 1, TO_DATE('2016-09-10','YYYY-MM-DD'), 2);
+
+INSERT INTO ZwrotyTowarów (IDZwrotu, IDKlienta, DataZwrotu, KwotaZwrotu) VALUES (2, 2, TO_DATE('2016-09-15','YYYY-MM-DD'), 15);
+
+INSERT INTO ZwrotyTowarów (IDZwrotu, IDKlienta, DataZwrotu, KwotaZwrotu) VALUES (3, 3, TO_DATE('2016-09-28','YYYY-MM-DD'), 3);
+
+-- Tabela Kontrahenci:
+/*Użycie klauzuli GENERATED AS IDENTITY możliwe jest wyłącznie w przypadku wersji 12c bazy danych Oracle. W przypadku bazy danych Oracle Express jest to wersja 4.2.6.00.03. Patch umożliwiający upgrade bazy danych Expres do tej wersji jest jednak dostępny jedynie dla użytkowników posiadających konto na My Oracle Support" - przyp. tłum.*/
+
+DROP TABLE Kontrahenci;
+
+CREATE TABLE Kontrahenci
+(
+ImięKontrahenta VARCHAR(30) NULL,
+NazwiskoKontrahenta VARCHAR(30) NULL,
+Województwo VARCHAR(10) NULL);
+
+INSERT INTO Kontrahenci (ImięKontrahenta, NazwiskoKontrahenta, Województwo) VALUES ('Janusz', 'Bentlewski', 'POM');
+
+INSERT INTO Kontrahenci (ImięKontrahenta, NazwiskoKontrahenta, Województwo) VALUES ('Michał', 'Rajewski', 'MAZ');
+
+INSERT INTO Kontrahenci (ImięKontrahenta, NazwiskoKontrahenta, Województwo) VALUES ('Emilia', 'Pieczyńska', 'LBU');
+
+-- Tabela NowiKontrahenci:
+
+DROP TABLE NowiKontrahenci;
+
+CREATE TABLE NowiKontrahenci
+(Województwo VARCHAR(10) NULL,
+Nazwa1 VARCHAR(30) NULL,
+Nazwa2 VARCHAR(30) NULL);
+
+INSERT INTO NowiKontrahenci (Województwo, Nazwa1, Nazwa2) VALUES ('PKR', 'Robert', 'Hołdys');
+
+INSERT INTO NowiKontrahenci (Województwo, Nazwa1, Nazwa2) VALUES ('MAZ', 'Beata', 'Kowalska');
+
+INSERT INTO NowiKontrahenci (Województwo, Nazwa1, Nazwa2) VALUES ('PKR', 'Grażyna', 'Mielniczuk');
+
+-- Tabela Dostawcy:
+
+DROP TABLE Dostawcy;
+
+CREATE TABLE Dostawcy
+(IDDostawcy INT NOT NULL,
+Województwo VARCHAR(10) NULL,
+KodPocztowy VARCHAR(10) NULL);
+
+INSERT INTO Dostawcy (IDDostawcy, Województwo, KodPocztowy) VALUES (1, 'POM', '77-131');
+
+INSERT INTO Dostawcy (IDDostawcy, Województwo, KodPocztowy) VALUES (2, 'LBL', '21-515');
+
+INSERT INTO Dostawcy (IDDostawcy, Województwo, KodPocztowy) VALUES (3, 'MAZ', '09-166');
+
+INSERT INTO Dostawcy (IDDostawcy, Województwo, KodPocztowy) VALUES (4, 'PKR', '36-221');
+
+INSERT INTO Dostawcy (IDDostawcy, Województwo, KodPocztowy) VALUES (5, 'ŁDZ', '97-407');
+
+
+-- Tabela ZmianaDanychDostawców:
+
+DROP TABLE ZmianaDanychDostawców;
+
+CREATE TABLE ZmianaDanychDostawców
+(IDZmiany INT NOT NULL,
+IDDostawcy INT NULL,
+Województwo VARCHAR(10) NULL,
+KodPocztowy VARCHAR(10) NULL);
+
+INSERT INTO ZmianaDanychDostawców (IDZmiany, IDDostawcy, Województwo, KodPocztowy) VALUES (1, 1, 'POM', '77-121');
+
+INSERT INTO ZmianaDanychDostawców (IDZmiany, IDDostawcy, Województwo, KodPocztowy) VALUES (2, 2, 'LBL', '21-516');
+
+INSERT INTO ZmianaDanychDostawców (IDZmiany, IDDostawcy, Województwo, KodPocztowy) VALUES (3, 5, 'ZPM', '72-427');
+
+-- Tabela PowiązanaTabela:
+
+DROP TABLE PowiązanaTabela;
+
+CREATE TABLE PowiązanaTabela
+(PierwszaKolumna INT NOT NULL PRIMARY KEY);
+
+
