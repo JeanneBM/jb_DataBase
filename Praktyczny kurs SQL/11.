@@ -1,0 +1,228 @@
+USE AdventureWorksLT2012
+GO
+
+SELECT @@TRANCOUNT;
+UPDATE [SalesLT].[Product]
+SET [ListPrice]=[ListPrice]-1
+WHERE [ProductID] = 712;
+SELECT @@TRANCOUNT;
+GO
+
+SET IMPLICIT_TRANSACTIONS ON;
+SELECT @@TRANCOUNT;
+UPDATE [SalesLT].[Product]
+SET [ListPrice]=[ListPrice]-1
+WHERE [ProductID] = 712;
+SELECT @@TRANCOUNT;
+GO
+
+COMMIT TRAN;
+SET IMPLICIT_TRANSACTIONS OFF;
+
+BEGIN TRAN;
+SELECT @@TRANCOUNT;
+
+UPDATE [SalesLT].[Product]
+SET [ListPrice]=1
+WHERE [ProductID] = 712;
+
+SELECT @@TRANCOUNT;
+GO
+
+--SESJA 1
+SELECT [ProductID], [ListPrice]
+FROM [SalesLT].[Product];
+GO
+
+--SESJA 2
+SELECT [ProductID], [ListPrice]
+FROM [SalesLT].[Product];
+GO
+
+--SESJA 1
+ROLLBACK TRAN
+GO
+
+--SESJA 2
+SELECT [ProductID], [ListPrice]
+FROM [SalesLT].[Product];
+GO
+
+--SESJA 1
+
+BEGIN TRAN;
+SELECT @@TRANCOUNT;
+BEGIN TRAN;
+SELECT @@TRANCOUNT;
+BEGIN TRAN;
+SELECT @@TRANCOUNT;
+COMMIT TRAN;
+SELECT @@TRANCOUNT;
+ROLLBACK TRAN;
+SELECT @@TRANCOUNT;
+
+BEGIN TRAN;
+
+INSERT INTO [SalesLT].[ProductCategory](Name)
+VALUES ('TEST1');
+
+SAVE TRAN PP1;
+
+INSERT INTO [SalesLT].[ProductCategory](Name)
+VALUES ('TEST2');
+
+SELECT @@TRANCOUNT;
+
+ROLLBACK TRAN PP1;
+
+SELECT @@TRANCOUNT;
+
+COMMIT TRAN;
+GO
+
+SELECT [Name]
+FROM [SalesLT].[ProductCategory]
+WHERE [Name] LIKE 'TEST_';
+GO
+
+--SESJA 1
+BEGIN TRAN;
+UPDATE [SalesLT].[Product]
+SET Name = UPPER(Name)
+WHERE ProductID<720;
+GO
+
+--SESJA 2
+UPDATE [SalesLT].[SalesOrderDetail]
+SET [UnitPriceDiscount] += 1
+WHERE [ProductID] <800;
+GO
+
+--SESJA 1
+SELECT *
+FROM [SalesLT].[SalesOrderDetail];
+GO
+
+--SESJA 2
+SELECT Name
+FROM [SalesLT].[Product];
+GO
+
+--SESJA 1
+SELECT @@TRANCOUNT;
+
+--SESJA 2
+ROLLBACK TRAN
+
+
+--SESJA 1
+BEGIN TRAN;
+UPDATE [SalesLT].[Customer]
+SET [EmailAddress] = 'ZmianaWToku'
+WHERE CustomerID=1;
+GO
+
+--SESJA 2
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+GO
+SELECT [EmailAddress]
+FROM [SalesLT].[Customer]
+WHERE CustomerID=1;
+GO
+
+--SESJA 1
+ROLLBACK
+GO
+
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+BEGIN TRAN;
+SELECT [EmailAddress]
+FROM [SalesLT].[Customer]
+WHERE CustomerID=1;
+GO
+
+--SESJA 2
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+UPDATE [SalesLT].[Customer]
+SET [EmailAddress] = 'OdczytWToku'
+WHERE CustomerID=1;
+GO
+
+--SESJA 1
+SELECT [EmailAddress]
+FROM [SalesLT].[Customer]
+WHERE CustomerID=1;
+COMMIT TRAN;
+GO
+
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+BEGIN TRAN;
+SELECT [Name]
+FROM [SalesLT].[Product]
+WHERE [ProductNumber] LIKE '%6';
+GO
+
+--SESJA 2
+UPDATE [SalesLT].[Product]
+SET [ProductNumber] = 'FB-9876'
+WHERE [ProductNumber] ='FB-9873';
+GO
+
+--SESJA 1
+SELECT [Name],[ProductNumber]
+FROM [SalesLT].[Product]
+WHERE [ProductNumber] LIKE '%6';
+
+--SESJA 2
+UPDATE [SalesLT].[Product]
+SET [ProductNumber] = 'FR-M94B-41'
+WHERE [ProductNumber] ='FR-M94B-46'
+GO
+
+--SESJA 1
+COMMIT TRAN
+GO
+
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+BEGIN TRAN;
+SELECT [Name]
+FROM [SalesLT].[Product]
+WHERE [ProductNumber] LIKE '%6';
+GO
+
+--SESJA 2
+UPDATE [SalesLT].[Product]
+SET Name = 'XYZ'
+WHERE [ProductNumber] ='HL-U509-R';
+GO
+
+--ZAKONCZ SESJE 1 i 2
+
+USE master;
+ALTER DATABASE AdventureWorksLT2012
+SET READ_COMMITTED_SNAPSHOT ON
+WITH ROLLBACK IMMEDIATE;
+GO
+--SESJA 1
+USE AdventureWorksLT2012;
+GO
+BEGIN TRAN;
+UPDATE [SalesLT].[Customer]
+SET LastName = 'X'
+WHERE CustomerID <3;
+GO
+
+--SESJA 2
+SELECT CustomerID, LastName
+FROM [SalesLT].[Customer]
+WHERE CustomerID <4;
+GO
+
+--SESJA 1
+ROLLBACK
+GO
+
+USE master;
+ALTER DATABASE AdventureWorksLT2012
+SET READ_COMMITTED_SNAPSHOT OFF
+WITH ROLLBACK IMMEDIATE;
