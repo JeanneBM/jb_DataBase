@@ -1,0 +1,153 @@
+SELECT
+Klient,
+ZakupionaIlość
+FROM RejestrZamówień
+WHERE ZakupionaIlość > 3
+AND ZakupionaIlość < 7;
+
+SELECT
+Klient,
+ZakupionaIlość,
+CenaZaSztukę
+FROM RejestrZamówień
+WHERE ZakupionaIlość > 8
+OR CenaZaSztukę > 3;
+
+SELECT
+Klient,
+Województwo,
+ZakupionaIlość
+FROM RejestrZamówień
+WHERE Województwo = 'pomorskie'
+OR Województwo = 'mazowieckie'
+AND ZakupionaIlość > 8;
+
+SELECT
+Klient,
+Województwo,
+ZakupionaIlość
+FROM RejestrZamówień
+WHERE (Województwo = 'pomorskie'
+OR Województwo = 'mazowieckie')
+AND ZakupionaIlość > 8;
+
+SELECT
+Klient,
+Województwo,
+ZakupionaIlość
+FROM RejestrZamówień
+WHERE Województwo = 'wielkopolskie'
+OR (Województwo = 'pomorskie'
+AND (ZakupionaIlość >= 3
+AND ZakupionaIlość <= 10));
+
+SELECT
+Klient,
+Województwo,
+ZakupionaIlość 
+FROM RejestrZamówień
+WHERE NOT Województwo = 'wielkopolskie';
+
+SELECT
+Klient,
+Województwo,
+ZakupionaIlość
+FROM RejestrZamówień
+WHERE Województwo <> 'wielkopolskie';
+
+SELECT
+Klient,
+Województwo,
+ZakupionaIlość 
+FROM RejestrZamówień
+WHERE NOT (Województwo = 'pomorskie'
+OR Województwo = 'wielkopolskie');
+
+SELECT
+Klient,
+Województwo,
+ZakupionaIlość 
+FROM RejestrZamówień
+WHERE Województwo <> 'pomorskie'
+AND Województwo <> 'wielkopolskie';
+
+SELECT
+Klient,
+Województwo,
+ZakupionaIlość 
+FROM RejestrZamówień
+WHERE NOT (Województwo = 'pomorskie'
+AND ZakupionaIlość > 3);
+
+SELECT
+Klient,
+Województwo,
+ZakupionaIlość 
+FROM RejestrZamówień
+WHERE Województwo <> 'pomorskie'
+OR ZakupionaIlość <= 3;
+
+SELECT
+Klient,
+ZakupionaIlość
+FROM RejestrZamówień
+WHERE ZakupionaIlość >= 5
+AND ZakupionaIlość <= 20;
+
+SELECT
+Klient,
+ZakupionaIlość
+FROM RejestrZamówień
+WHERE ZakupionaIlość BETWEEN 5 AND 20;
+
+SELECT
+Klient,
+ZakupionaIlość
+FROM RejestrZamówień
+WHERE ZakupionaIlość NOT BETWEEN 5 AND 20;
+
+SELECT
+Klient,
+Województwo
+FROM RejestrZamówień
+WHERE Województwo = 'pomorskie'
+OR Województwo = 'wielkopolskie';
+
+SELECT
+Klient,
+Województwo
+FROM RejestrZamówień
+WHERE Województwo IN ('pomorskie', 'wielkopolskie');
+
+SELECT
+Klient,
+Województwo
+FROM RejestrZamówień
+WHERE Województwo NOT IN ('pomorskie', 'wielkopolskie');
+
+SELECT
+Opis,
+Waga
+FROM Produkty
+WHERE Waga = 0;
+
+SELECT
+Opis,
+Waga
+FROM Produkty
+WHERE Waga = 0
+OR Waga IS NULL;
+
+SELECT
+Opis,
+Waga
+FROM Produkty
+WHERE NVL(Waga, 0) = 0;
+
+SELECT
+Opis,
+NVL(Waga, 0) AS "Waga"
+FROM Produkty
+WHERE Waga = 0
+OR Waga IS NULL;
+
