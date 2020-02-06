@@ -1,0 +1,36 @@
+USE AdventureWorksLT2012;
+GO
+
+SELECT [LastName], [FirstName]
+FROM [SalesLT].[Customer]
+ORDER BY [LastName];
+GO
+
+SELECT 1
+WHERE NULL = NULL
+UNION
+SELECT 0
+WHERE NULL <> NULL;
+GO
+
+SELECT 1
+WHERE NULL>1
+UNION
+SELECT 0
+WHERE NULL<1;
+GO
+
+SELECT COUNT([Size])
+FROM [SalesLT].[Product];
+
+SELECT COUNT([Size])
+FROM [SalesLT].[Product]
+WHERE [Size] = 'XL';
+
+SELECT COUNT([Size])
+FROM [SalesLT].[Product]
+WHERE [Size] <> 'XL';
+GO
+
+SELECT NULL/0, 'Ala' + NULL, 5 + NULL, 10 * NULL, NULL + NULL;
+GO
