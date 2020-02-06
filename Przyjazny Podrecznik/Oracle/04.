@@ -1,0 +1,60 @@
+SELECT 
+SUBSTR('czarnaowca', 7, 4) AS "Wynik"
+FROM DUAL;
+
+SELECT 
+LTRIM('          dwa jabłka') AS "Wynik"
+FROM DUAL;
+
+SELECT 
+UPPER('Abraham Lincoln') AS "Konwersja na wielkie litery",
+LOWER('ABRAHAM LINCOLN') AS "Konwersja na małe litery"
+FROM DUAL;
+
+SELECT CURRENT_DATE
+FROM DUAL;
+
+SELECT 
+/* Funkcja TO_DATE umożliwia przekonwertowanie ciągu znaków na podany przez użytkownika format daty, zaś dzięki funkcji TO_CHAR możliwe jest wybranie wskazanego fragmentu tego ciągu znaków. - przyp. tłum. */
+TO_CHAR(TO_DATE('2017-05-06','YYYY-MM-DD'), 'DD') 
+FROM DUAL;
+
+SELECT ROUND(712.863, 3)
+FROM DUAL;
+
+SELECT ROUND(712.863, 2)
+FROM DUAL;
+
+SELECT ROUND(712.863, 1)
+FROM DUAL;
+
+SELECT ROUND(712.863, 0)
+FROM DUAL;
+
+SELECT ROUND(712.863, -1)
+FROM DUAL;
+
+SELECT ROUND(712.863, -2)
+FROM DUAL;
+
+SELECT POWER(5,2) AS "Liczba 5 do kwadratu"
+FROM DUAL;
+
+SELECT POWER(25,.5) AS "Pierwiastek kwadr. z liczby 25"
+FROM DUAL;
+
+SELECT 
+'2017-04-11' AS "Data Pierwotna",
+/* Domyślny format daty w Oracle Express to MM/DD/YYYY. W celu zmiany formatu daty należy użyć funkcji TO_DATE. - przyp. tłum. */
+CAST('04/11/2017' AS DATE) 
+FROM DUAL;
+
+SELECT 
+Opis,
+Waga
+FROM Produkty;
+
+SELECT 
+Opis,
+NVL(CAST(Waga AS CHAR), 'Nieznana') AS "Waga"
+FROM Produkty;
