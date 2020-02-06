@@ -1,0 +1,178 @@
+SELECT
+DISTINCT
+Wykonawca
+FROM TytułyUtworów
+ORDER BY Wykonawca;
+
+SELECT
+DISTINCT
+Wykonawca,
+Album
+FROM TytułyUtworów
+ORDER BY Wykonawca, Album;
+
+SELECT
+SUM(Opłata) AS "Sum. opłata za siłownię"
+FROM Opłaty
+WHERE RodzajOpłaty = 'Siłownia';
+
+SELECT
+AVG(LiczbaPunktów) AS "Średnia l. pkt. za sprawdzian"
+FROM Punktacja
+WHERE OcenianaPraca = 'Sprawdzian';
+
+SELECT
+AVG(LiczbaPunktów) AS "Średnia l. pkt. za sprawdzian",
+MIN(LiczbaPunktów) AS "Min. l. pkt. za sprawdzian",
+MAX(LiczbaPunktów) AS "Max. l. pkt. za sprawdzian"
+FROM Punktacja
+WHERE OcenianaPraca = 'Sprawdzian';
+
+SELECT
+COUNT(*) AS "L. wierszy z pracą domową"
+FROM Punktacja
+WHERE OcenianaPraca = 'Praca domowa';
+
+SELECT
+COUNT(LiczbaPunktów) AS "L. wierszy z pkt. za p. dom."
+FROM Punktacja
+WHERE OcenianaPraca = 'Praca domowa';
+
+SELECT
+COUNT(DISTINCT RodzajOpłaty) AS "Liczba rodzajów opłaty"
+FROM Opłaty;
+
+SELECT
+OcenianaPraca AS "Oceniana praca",
+AVG(LiczbaPunktów) AS "Średnia liczba punktów"
+FROM Punktacja
+GROUP BY OcenianaPraca
+ORDER BY OcenianaPraca;
+
+SELECT
+OcenianaPraca AS "Oceniana praca",
+Uczeń AS "Uczeń",
+AVG(LiczbaPunktów) AS "Średnia liczba punktów"
+FROM Punktacja
+GROUP BY OcenianaPraca, Uczeń
+ORDER BY OcenianaPraca, Uczeń;
+
+SELECT
+OcenianaPraca AS "Oceniana praca",
+Uczeń AS "Uczeń",
+AVG(LiczbaPunktów) AS "Średnia liczba punktów"
+FROM Punktacja
+GROUP BY OcenianaPraca, Uczeń
+ORDER BY Uczeń, OcenianaPraca;
+
+SELECT
+Uczeń AS "Uczeń",
+OcenianaPraca AS "Oceniana praca",
+AVG(LiczbaPunktów) AS "Średnia liczba punktów"
+FROM Punktacja
+GROUP BY OcenianaPraca, Uczeń
+ORDER BY Uczeń, OcenianaPraca;
+
+SELECT
+Uczeń AS "Uczeń",
+OcenianaPraca AS "Oceniana praca",
+LiczbaPunktów AS "Liczba punktów"
+FROM Punktacja
+WHERE OcenianaPraca = 'Sprawdzian'
+AND LiczbaPunktów >= 70
+ORDER BY Uczeń, LiczbaPunktów;
+
+SELECT
+Uczeń AS "Uczeń",
+AVG(LiczbaPunktów) AS "Średnia l. pkt. za sprawdzian"
+FROM Punktacja
+WHERE OcenianaPraca = 'Sprawdzian'
+GROUP BY Uczeń
+HAVING AVG(LiczbaPunktów) >= 70
+ORDER BY Uczeń;
+
+SELECT
+Uczeń AS "Uczeń",
+OcenianaPraca AS "Oceniana praca",
+AVG(LiczbaPunktów) AS "Średnia liczba punktów"
+FROM Punktacja
+WHERE OcenianaPraca = 'Sprawdzian'
+GROUP BY Uczeń, OcenianaPraca
+HAVING AVG (LiczbaPunktów) >= 70
+ORDER BY Uczeń;
+
+SELECT
+CASE KodKategorii
+WHEN 'O' THEN 'Owoc'
+WHEN 'W' THEN 'Warzywo'
+ELSE 'Inne'
+END AS "Kategoria",
+COUNT(*) AS "LiczbaProduktów"
+FROM ArtykułySpożywcze
+GROUP BY
+CASE KodKategorii
+WHEN 'O' THEN 'Owoc'
+WHEN 'W' THEN 'Warzywo'
+ELSE 'Inne'
+END;
+ 
+SELECT
+Uczeń AS "Uczeń",
+LiczbaLatNauki AS "Liczba lat nauki",
+OcenianaPraca AS "Oceniana praca",
+AVG(LiczbaPunktów) AS "Średnia liczba punktów"
+FROM Punktacja
+WHERE OcenianaPraca = 'Sprawdzian'
+GROUP BY Uczeń, LiczbaLatNauki, OcenianaPraca
+HAVING AVG(LiczbaPunktów) >=
+CASE
+WHEN LiczbaLatNauki = 7 THEN 70
+WHEN LiczbaLatNauki = 8 THEN 75
+ELSE 80
+END
+ORDER BY Uczeń;
+
+SELECT
+ROW_NUMBER() OVER (ORDER BY StosunekCenyDoZysku) AS "Numer wiersza",
+Skrót AS "Symbol",
+NazwaFirmy AS "Nazwa",
+NazwaGiełdy AS "Giełda",
+StosunekCenyDoZysku AS "Stosunek ceny do zysku"
+FROM Akcje
+ORDER BY StosunekCenyDoZysku;
+
+SELECT
+ROW_NUMBER() OVER (ORDER BY StosunekCenyDoZysku) AS "Numer wiersza",
+RANK() OVER (ORDER BY StosunekCenyDoZysku) AS "Wynik funkcji rank",
+DENSE_RANK() OVER (ORDER BY StosunekCenyDoZysku) AS "Wynik funkcji dense_rank",
+Skrót AS "Symbol",
+StosunekCenyDoZysku AS "Stosunek ceny do zysku"
+FROM Akcje
+ORDER BY StosunekCenyDoZysku;
+
+SELECT
+NTILE(4) OVER (ORDER BY StosunekCenyDoZysku) AS "Kwartyl",
+NTILE(10) OVER (ORDER BY StosunekCenyDoZysku) AS "Decyl",
+Skrót AS "Symbol",
+StosunekCenyDoZysku AS "Stosunek ceny do zysku"
+FROM Akcje
+ORDER BY StosunekCenyDoZysku;
+
+SELECT
+NazwaGiełdy AS "Giełda",
+ROW_NUMBER() OVER (PARTITION BY NazwaGiełdy ORDER BY StosunekCenyDoZysku)
+AS "Nr wiersza w ramach giełdy",
+Skrót AS "Symbol",
+NazwaFirmy AS "Nazwa",
+StosunekCenyDoZysku AS "Stosunek ceny do zysku"
+FROM Akcje
+ORDER BY NazwaGiełdy, StosunekCenyDoZysku;
+
+SELECT
+NazwaGiełdy AS "Giełda",
+NTILE(4) OVER (PARTITION BY NazwaGiełdy ORDER BY StosunekCenyDoZysku) 
+AS "Numer kwartyla",
+Skrót AS "Symbol",
+StosunekCenyDoZysku AS "Stosunek ceny do zysku"
+FROM Akcje
+ORDER BY
