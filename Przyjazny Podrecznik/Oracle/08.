@@ -1,0 +1,48 @@
+
+SELECT
+CASE KodKategorii
+WHEN 'O' THEN 'Owoc'
+WHEN 'W' THEN 'Warzywo'
+ELSE 'Inne'
+END AS "Kategoria",
+Opis
+FROM ArtykułySpożywcze;
+
+SELECT
+CASE
+WHEN KodKategorii = 'O' THEN 'Owoc'
+WHEN KodKategorii = 'W' THEN 'Warzywo'
+ELSE 'Inne'
+END AS "Kategoria",
+Opis
+FROM ArtykułySpożywcze;
+
+SELECT
+CASE
+WHEN Owoc = 'X' THEN 'Owoc'
+WHEN Warzywo = 'X' THEN 'Warzywo'
+ELSE 'Inne'
+END AS "Kategoria",
+Opis
+FROM KategorieArtykulowSpożywczych;
+
+SELECT *
+FROM AmerykaPółnocna
+ORDER BY
+Kraj,
+CASE Kraj
+WHEN 'USA' THEN Stan
+WHEN 'Kanada' THEN Prowincja
+ELSE Stan
+END,
+Miasto;
+
+SELECT *
+FROM ListaKlientów
+WHERE Dochód >
+CASE
+WHEN Płeć = 'M' AND Wiek >= 50 THEN 75000
+WHEN Płeć = 'K' AND Wiek >= 35 THEN 60000
+ELSE 50000
+END;
+
