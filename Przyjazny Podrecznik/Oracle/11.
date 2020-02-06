@@ -1,0 +1,25 @@
+SELECT *
+FROM Klienci
+INNER JOIN Zamówienia
+ON Klienci.IDKlienta = Zamówienia.IDKlienta;
+
+SELECT *
+FROM Zamówienia
+INNER JOIN Klienci
+ON Zamówienia.IDKlienta = Klienci.IDKlienta;
+
+SELECT *
+FROM Klienci, Zamówienia
+WHERE Klienci.IDKlienta = Zamówienia.IDKlienta;
+
+SELECT
+K.IDKlienta AS "ID klienta",
+K.ImięKlienta AS "Imię klienta",
+K.NazwiskoKlienta AS "Nazwisko klienta",
+Z.IDZamówienia AS "ID zamówienia",
+Z.DataZamówienia AS "Data",
+Z.KwotaZamówienia AS "Kwota"
+FROM Klienci K
+INNER JOIN Zamówienia Z
+ON K.IDKlienta = Z.IDKlienta;
+
