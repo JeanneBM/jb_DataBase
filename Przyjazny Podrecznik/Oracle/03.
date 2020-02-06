@@ -1,0 +1,38 @@
+SELECT
+'Imię klienta:',
+ImięKlienta
+FROM Sprzedaż;
+
+SELECT
+5,
+ImięKlienta
+FROM Sprzedaż;
+
+SELECT
+IDSprzedaży,
+ZakupionaIlość,
+CenaZaSztukę,
+ZakupionaIlość * CenaZaSztukę
+FROM Sprzedaż;
+
+SELECT
+IDSprzedaży,
+ImięKlienta,
+NazwiskoKlienta,
+ImięKlienta || ' ' || NazwiskoKlienta
+FROM Sprzedaż;
+
+SELECT
+IDSprzedaży,
+ImięKlienta,
+NazwiskoKlienta,
+ImięKlienta || ' ' || NazwiskoKlienta AS "Nazwa"
+FROM Sprzedaż;
+
+SELECT
+IDSprzedaży,
+ImięKlienta,
+NazwiskoKlienta,
+ImięKlienta || ' ' || NazwiskoKlienta Nazwa
+FROM Sprzedaż;
+
