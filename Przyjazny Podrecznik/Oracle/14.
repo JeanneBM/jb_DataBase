@@ -1,0 +1,133 @@
+SELECT
+NazwaUżytkownika AS "Nazwa użytkownika",
+NVL(TransakcjeGotówka.SumaGotówka, 0) AS "Łączna kw. zapł. gotówką"
+FROM Użytkownicy
+LEFT JOIN
+(SELECT
+IDUżytkownika,
+SUM(KwotaTransakcji) AS SumaGotówka
+FROM Transakcje
+WHERE SposóbZapłaty = 'Gotówka'
+GROUP BY IDUżytkownika) TransakcjeGotówka
+ON Użytkownicy.IDUżytkownika = TransakcjeGotówka.IDUżytkownika
+ORDER BY Użytkownicy.IDUżytkownika;
+
+SELECT
+IDUżytkownika,
+SUM(KwotaTransakcji) AS "SumaGotówka"
+FROM Transakcje
+WHERE SposóbZapłaty = 'Gotówka'
+GROUP BY IDUżytkownika;
+
+SELECT
+NazwaUżytkownika AS "Nazwa użytkownika",
+SUM(KwotaTransakcji) AS "SumaGotówka"
+FROM Użytkownicy
+LEFT JOIN Transakcje 
+ON Użytkownicy.IDUżytkownika = Transakcje.IDUżytkownika
+WHERE SposóbZapłaty = 'Gotówka'
+GROUP BY Użytkownicy.IDUżytkownika, Użytkownicy.NazwaUżytkownika 
+ORDER BY Użytkownicy.IDUżytkownika;
+
+SELECT NazwaUżytkownika AS "Nazwa użytkownika"
+FROM Użytkownicy
+WHERE IDUżytkownika IN 
+(SELECT IDUżytkownika 
+FROM Transakcje
+WHERE SposóbZapłaty = 'Gotówka');
+
+SELECT NazwaUżytkownika AS "Nazwa użytkownika"
+FROM Użytkownicy
+INNER JOIN Transakcje
+ON Użytkownicy.IDUżytkownika = Transakcje.IDUżytkownika
+WHERE SposóbZapłaty = 'Gotówka'
+GROUP BY Użytkownicy.NazwaUżytkownika;
+
+SELECT 
+NazwaUżytkownika AS "Nazwa użytkownika"
+FROM Użytkownicy
+WHERE
+(SELECT
+SUM(KwotaTransakcji) 
+FROM Transakcje
+WHERE Użytkownicy.IDUżytkownika = Transakcje.IDUżytkownika)
+< 20;
+
+SELECT 
+NazwaUżytkownika AS "Nazwa użytkownika"
+FROM Użytkownicy
+LEFT JOIN Transakcje
+ON Użytkownicy.IDUżytkownika = Transakcje.IDUżytkownika
+GROUP BY Użytkownicy.IDUżytkownika, Użytkownicy.NazwaUżytkownika
+HAVING SUM (KwotaTransakcji) < 20;
+
+SELECT 
+NazwaUżytkownika AS "Nazwa użytkownika"
+FROM Użytkownicy
+WHERE EXISTS
+(SELECT *
+FROM Transakcje
+WHERE Użytkownicy.IDUżytkownika = Transakcje.IDUżytkownika);
+
+SELECT 
+NazwaUżytkownika AS "Nazwa użytkownika"
+FROM Użytkownicy
+WHERE IDUżytkownika IN
+(SELECT IDUżytkownika
+FROM Transakcje);
+
+SELECT 
+NazwaUżytkownika AS "Nazwa użytkownika"
+FROM Użytkownicy
+INNER JOIN Transakcje
+ON Użytkownicy.IDUżytkownika = Transakcje.IDUżytkownika
+GROUP BY NazwaUżytkownika;
+
+SELECT 
+NazwaUżytkownika AS "Nazwa użytkownika",
+COUNT(IDTransakcji) AS "Liczba transakcji"
+FROM Użytkownicy
+LEFT JOIN Transakcje
+ON Użytkownicy.IDUżytkownika = Transakcje.IDUżytkownika 
+GROUP BY Użytkownicy.IDUżytkownika, Użytkownicy.NazwaUżytkownika
+ORDER BY Użytkownicy.IDUżytkownika;
+
+SELECT 
+NazwaUżytkownika AS "Nazwa użytkownika",
+(SELECT
+COUNT(IDTransakcji)
+FROM Transakcje
+WHERE Użytkownicy.IDUżytkownika = Transakcje.IDUżytkownika)
+AS "Liczba transakcji"
+FROM Użytkownicy
+ORDER BY Użytkownicy.IDUżytkownika;
+
+SELECT
+NazwaUżytkownika AS "Nazwa użytkownika",
+NVL(TransakcjeGotówka.SumaGotówka, 0) AS "Łączna kw. zapł. gotówką"
+FROM Użytkownicy
+LEFT JOIN
+(SELECT
+IDUżytkownika,
+SUM(KwotaTransakcji) AS SumaGotówka
+FROM Transakcje
+WHERE SposóbZapłaty = 'Gotówka'
+GROUP BY IDUżytkownika) TransakcjeGotówka
+ON Użytkownicy.IDUżytkownika = TransakcjeGotówka.IDUżytkownika
+ORDER BY Użytkownicy.IDUżytkownika;
+
+WITH TransakcjeGotówka AS
+(SELECT
+IDUżytkownika,
+SUM(KwotaTransakcji) AS SumaGotówka
+FROM Transakcje
+WHERE SposóbZapłaty = 'Gotówka'
+GROUP BY IDUżytkownika)
+SELECT
+NazwaUżytkownika AS "Nazwa użytkownika",
+NVL(TransakcjeGotówka.SumaGotówka, 0) AS "Łączna kw. zapł. gotówką"
+FROM Użytkownicy
+LEFT JOIN TransakcjeGotówka
+ON Użytkownicy.IDUżytkownika = TransakcjeGotówka.IDUżytkownika
+ORDER BY Użytkownicy.IDUżytkownika;
+
