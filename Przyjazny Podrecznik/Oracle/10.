@@ -1,0 +1,132 @@
+
+SELECT
+Kategoria,
+Podkategoria,
+SUM(LiczbaSztuk) AS "Liczba sztuk"
+FROM WykazProduktów
+GROUP BY Kategoria, Podkategoria
+ORDER BY Kategoria, Podkategoria
+
+SELECT
+Kategoria,
+Podkategoria,
+SUM(LiczbaSztuk) AS "Liczba sztuk"
+FROM WykazProduktów
+GROUP BY ROLLUP(Kategoria, Podkategoria);
+
+SELECT
+Kategoria,
+Podkategoria,
+SUM(LiczbaSztuk) AS "Liczba sztuk"
+FROM WykazProduktów
+GROUP BY ROLLUP(Kategoria, Podkategoria)
+ORDER BY Kategoria, Podkategoria;
+
+SELECT
+Kategoria,
+Podkategoria,
+SUM(LiczbaSztuk) AS "Liczba sztuk",
+GROUPING(Kategoria) AS "Kategoria – GROUPING",
+GROUPING(Podkategoria) AS "Podkategoria – GROUPING"
+FROM WykazProduktów
+GROUP BY ROLLUP(Kategoria, Podkategoria);
+
+SELECT
+NVL(Kategoria,'') AS "Kategoria",
+NVL(Podkategoria, '') AS "Podkategoria",
+SUM(LiczbaSztuk) AS "LiczbaSztuk",
+CASE WHEN GROUPING(Kategoria) = 1 then 'Suma łączna'
+WHEN GROUPING(Podkategoria) = 1 then 'Suma częściowa'
+ELSE ' ' END AS "Suma częściowa/Suma łączna"
+FROM WykazProduktów
+GROUP BY ROLLUP(Kategoria, Podkategoria);
+
+SELECT
+CASE
+WHEN GROUPING(Kategoria) = 1 THEN 'SUMA ŁĄCZNA'
+WHEN GROUPING(Podkategoria) = 1 THEN 'SUMA CZĘŚCIOWA'
+ELSE NVL(Kategoria,'') END AS "Kategoria",
+NVL(Podkategoria, '') AS "Podkategoria",
+SUM(LiczbaSztuk) AS "Liczba sztuk"
+FROM WykazProduktów
+GROUP BY ROLLUP(Kategoria, Podkategoria);
+
+SELECT 
+Województwo,
+KanałSprzedaży AS "Kanał sprzedaży",
+SUM(KwotaSprzedaży) AS "Kwota sprzedaży"
+FROM ZestawienieSprzedaży
+GROUP BY Województwo, KanałSprzedaży
+ORDER BY Województwo, KanałSprzedaży;
+
+SELECT 
+Województwo,
+KanałSprzedaży AS "Kanał sprzedaży",
+SUM(KwotaSprzedaży) AS "Kwota sprzedaży"
+FROM ZestawienieSprzedaży
+GROUP BY CUBE(Województwo, KanałSprzedaży)
+ORDER BY Województwo, KanałSprzedaży;
+
+SELECT 
+Województwo,
+KanałSprzedaży AS "Kanał sprzedaży",
+SUM(KwotaSprzedaży) AS "Kwota sprzedaży",
+GROUPING(Województwo) AS "Województwo – GROUPING",
+GROUPING(KanałSprzedaży) AS "Kanał sprzedaży – GROUPING"
+FROM ZestawienieSprzedaży
+GROUP BY CUBE(Województwo, KanałSprzedaży)
+ORDER BY Województwo, KanałSprzedaży;
+
+SELECT
+NVL(Województwo,' ') AS "Województwo",
+NVL(KanałSprzedaży, ' ') AS "Kanał sprzedaży",
+SUM(KwotaSprzedaży) AS "Kwota sprzedaży",
+CASE WHEN GROUPING(Województwo) = 1
+AND GROUPING(KanałSprzedaży) = 1 then 'Suma łączna'
+WHEN GROUPING(Województwo) = 1 
+AND GROUPING(KanałSprzedaży) = 0 then 'Kanał sprzedaży – suma częściowa'
+WHEN GROUPING(Województwo) = 0
+AND GROUPING(KanałSprzedaży) = 1 then 'Województwo – suma częściowa'
+ELSE ' ' END AS "Suma częściowa/Suma łączna"
+FROM ZestawienieSprzedaży
+GROUP BY CUBE(Województwo, KanałSprzedaży)
+ORDER BY
+CASE 
+WHEN GROUPING(Województwo) = 0 AND GROUPING(KanałSprzedaży) = 0 THEN 1
+WHEN GROUPING(Województwo) = 0 AND GROUPING(KanałSprzedaży) = 1 THEN 2
+WHEN GROUPING(Województwo) = 1 AND GROUPING(KanałSprzedaży) = 0 THEN 3
+ELSE 4 END;
+
+SELECT
+Województwo,
+KanałSprzedaży,
+SUM(KwotaSprzedaży) AS "Kwota sprzedaży"
+FROM ZestawienieSprzedaży
+GROUP BY Województwo, KanałSprzedaży
+ORDER BY Województwo, KanałSprzedaży;
+
+SELECT
+DataSprzedaży, 
+Województwo,
+KanałSprzedaży,
+SUM(KwotaSprzedaży) AS "Kwota sprzedaży"
+FROM ZestawienieSprzedaży
+GROUP BY DataSprzedaży, Województwo, KanałSprzedaży
+ORDER BY DataSprzedaży, Województwo, KanałSprzedaży;
+
+SELECT * FROM
+(SELECT DataSprzedaży, KanałSprzedaży, Województwo, KwotaSprzedaży FROM ZestawienieSprzedaży) 
+PIVOT (SUM(KwotaSprzedaży) FOR Województwo IN ('MAZ', 'PDL')) 
+ORDER BY DataSprzedaży;
+
+SELECT * FROM
+(SELECT KanałSprzedaży, DataSprzedaży, Województwo, KwotaSprzedaży FROM ZestawienieSprzedaży)
+PIVOT (SUM(KwotaSprzedaży) FOR Województwo IN ('MAZ', 'PDL'))
+ORDER BY KanałSprzedaży;
+
+SELECT * FROM
+(SELECT DataSprzedaży, Województwo, KanałSprzedaży, KwotaSprzedaży FROM ZestawienieSprzedaży)
+PIVOT (SUM(KwotaSprzedaży) FOR KanałSprzedaży IN ('Internet', 'PunktSprzedażyDetalicznej'))
+ORDER BY DataSprzedaży;
+
+
