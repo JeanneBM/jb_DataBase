@@ -1,0 +1,77 @@
+SELECT
+ImięKlienta,
+NazwiskoKlienta,
+ZakupionaIlość
+FROM Sprzedaż
+WHERE NazwiskoKlienta = 'Solecki';
+
+SELECT
+ImięKlienta,
+NazwiskoKlienta,
+ZakupionaIlość
+FROM Sprzedaż
+WHERE ZakupionaIlość = 5;
+
+SELECT
+ImięKlienta,
+NazwiskoKlienta,
+ZakupionaIlość
+FROM Sprzedaż
+WHERE ZakupionaIlość > 6;
+
+SELECT
+ImięKlienta,
+NazwiskoKlienta
+FROM Sprzedaż
+WHERE NazwiskoKlienta > 'K';
+
+SELECT 
+Tytuł AS "Tytuł książki",
+SprzedażWBieżącymMiesiącu AS "Sprzedana ilość"	
+FROM
+(SELECT *
+FROM Książki
+ORDER BY SprzedażWBieżącymMiesiącu DESC)
+WHERE ROWNUM <= 3;
+
+SELECT *
+FROM
+(SELECT 
+Tytuł AS "Tytuł książki",
+SprzedażWBieżącymMiesiącu AS "Sprzedana ilość"
+FROM Książki
+WHERE Autor = 'Szekspir'
+ORDER BY SprzedażWBieżącymMiesiącu DESC)
+WHERE ROWNUM <= 1;
+
+SELECT 
+TytułFilmu AS "Film"
+FROM Filmy
+WHERE UPPER(TytułFilmu) LIKE '%MIŁOŚĆ%';
+
+SELECT 
+TytułFilmu AS "Film"
+FROM Filmy
+WHERE UPPER(TytułFilmu) LIKE 'MIŁOŚĆ%';
+
+SELECT 
+TytułFilmu AS "Film"
+FROM Filmy
+WHERE UPPER(TytułFilmu) LIKE '%MIŁOŚĆ';
+
+SELECT 
+TytułFilmu AS "Film"
+FROM Filmy
+WHERE UPPER(TytułFilmu) LIKE '% MIŁOŚĆ %';
+
+SELECT 
+Imię,
+Nazwisko
+FROM Aktorzy
+WHERE UPPER(Imię) LIKE '_ARY';
+
+SELECT 
+Imię,
+Nazwisko
+FROM Aktorzy
+WHERE UPPER(Imię) LIKE 'J_N';
