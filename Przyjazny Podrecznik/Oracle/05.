@@ -1,0 +1,54 @@
+SELECT
+ImięSprzedawcy,
+NazwiskoSprzedawcy
+FROM Sprzedawcy
+ORDER BY NazwiskoSprzedawcy;
+
+SELECT
+ImięSprzedawcy,
+NazwiskoSprzedawcy
+FROM Sprzedawcy
+ORDER BY ImięSprzedawcy;
+
+SELECT
+ImięSprzedawcy,
+NazwiskoSprzedawcy
+FROM Sprzedawcy
+ORDER BY ImięSprzedawcy ASC;
+
+SELECT
+ImięSprzedawcy,
+NazwiskoSprzedawcy
+FROM Sprzedawcy
+ORDER BY ImięSprzedawcy DESC;
+
+SELECT
+ImięSprzedawcy,
+NazwiskoSprzedawcy
+FROM Sprzedawcy
+ORDER BY NazwiskoSprzedawcy, ImięSprzedawcy;
+
+SELECT 
+NazwiskoSprzedawcy || ', ' || ImięSprzedawcy AS "Nazwa"
+FROM Sprzedawcy
+ORDER BY NazwiskoSprzedawcy || ', ' || ImięSprzedawcy;
+
+SELECT 
+ImięSprzedawcy, 
+NazwiskoSprzedawcy
+FROM Sprzedawcy
+ORDER BY NazwiskoSprzedawcy || ImięSprzedawcy;
+
+SELECT DaneLiczbowe
+FROM SortowanieDanych
+ORDER BY DaneLiczbowe;
+
+SELECT 
+NVL(DaneLiczbowe, 0) AS "DaneLiczbowe"
+FROM SortowanieDanych
+ORDER BY NVL(DaneLiczbowe,0);
+
+SELECT 
+DaneZnakowe
+FROM SortowanieDanych
+ORDER BY DaneZnakowe;
