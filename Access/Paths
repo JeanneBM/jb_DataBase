@@ -1,0 +1,57 @@
+Tworzenie bazy danych:
+
+- Otwórz
+- Otwórz/ Utwórz nowy plik...
+- Nowy plik
+- Pusta baza danych.../Nowy  plik  bazy  danych [wskazanie istniejącej bazy]
+- OK
+
+Tworzenie tabeli:
+
+- Obiekty
+- Tabele
+- Utwórz tabelę w widoku projektu
+- Nazwa pola
+- Typ danych - Autonumerowanie
+- Ogólne - Rozmiar  pola [automatycznie mamy taki, jak wynika z treści zadania]
+- przypisujemy klucz podstawowy klikając odpowiednią ikonę na pasku narzędzi
+- Zapisz
+- Zapisywanie  jako
+- Nazwa tabeli
+- OK
+
+Wprowadzanie danych:
+
+- Otwieramy tabelę w widoku Arkusza danych
+- wpisujemy dane
+
+RELACJE
+
+Ustalanie relacji między tabelami i włączenie wymuszania więzi integralności:
+
+- Edytowanie relacji
+- Tabela/Kwerenda i Nazwa pola poniżej
+- przeciągamy na pole o identycznej nazwie w Pokrewna tabela/kwerenda
+- Checkbox "Wymuszaj więzy integralności"
+- Utwórz
+
+Tworzenie relacji jak nie widać odpowiedniej pokrewnej tabeli:
+
+- Prawy przycisk myszy
+- Pokaż tabelę
+- Pokazywanie tabeli
+- wybieramy tabelę
+- Dodaj
+- tworzymy relację jw
+- Wymuszaj  więzy  integralności
+
+Błąd  „Relacja  musi dotyczyd takiej samej liczby pól, o takich samych typach danych” - należy sprawdzić w tabelach typy danych
+
+- zmieniamy typ np. tekstowy na liczbę, zapisujemy zmiany i zamykamy obie tabele
+- i ponownie jw ustalamy relacje
+
+Błąd "Microsoft Office Access nie może utworzyć tej relacji i wymusić więzów integralności." błędne dane w tabelach, 
+np. w jednej tabeli jest 9 danych pod tą samą nazwą a w drugiej 20
+
+- poprawiamy wpis 
+- i ponownie jw 
